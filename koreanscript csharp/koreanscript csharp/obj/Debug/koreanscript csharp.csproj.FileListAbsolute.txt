@@ -1,0 +1,10 @@
+C:\Users\배재현\Desktop\koreanscript csharp\koreanscript csharp\bin\Debug\koreanscript csharp.exe.config
+C:\Users\배재현\Desktop\koreanscript csharp\koreanscript csharp\bin\Debug\koreanscript csharp.exe
+C:\Users\배재현\Desktop\koreanscript csharp\koreanscript csharp\bin\Debug\koreanscript csharp.pdb
+C:\Users\배재현\Desktop\koreanscript csharp\koreanscript csharp\obj\Debug\koreanscript csharp.csprojAssemblyReference.cache
+C:\Users\배재현\Desktop\koreanscript csharp\koreanscript csharp\obj\Debug\koreanscript_csharp.Form1.resources
+C:\Users\배재현\Desktop\koreanscript csharp\koreanscript csharp\obj\Debug\koreanscript_csharp.Properties.Resources.resources
+C:\Users\배재현\Desktop\koreanscript csharp\koreanscript csharp\obj\Debug\koreanscript csharp.csproj.GenerateResource.cache
+C:\Users\배재현\Desktop\koreanscript csharp\koreanscript csharp\obj\Debug\koreanscript csharp.csproj.CoreCompileInputs.cache
+C:\Users\배재현\Desktop\koreanscript csharp\koreanscript csharp\obj\Debug\koreanscript csharp.exe
+C:\Users\배재현\Desktop\koreanscript csharp\koreanscript csharp\obj\Debug\koreanscript csharp.pdb
