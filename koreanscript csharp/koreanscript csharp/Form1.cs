@@ -46,14 +46,12 @@ namespace koreanscript_csharp
         {
             await Task.Delay(1);
             int outint;
-            int outdecimal;
+            decimal outdecimal;
             string read = File.ReadAllText("변수.json");
             switch (type)
             {
                 case "정수변수":
                     type = "int";
-                    try { int a = int.Parse(value); }
-                    catch { File.WriteAllText("error.log", File.ReadAllText("error.log") + "\n" + 계수기 + "번째 줄: 변수 타입과 변수에 들어가는 값이 맞지 않습니다"); }
                     break;
                 case "문자변수":
                     type = "string";
@@ -62,7 +60,41 @@ namespace koreanscript_csharp
                     type = "decimal";
                     break;
             }
-            if (type == "int" && int.TryParse(value, out outint))
+            if (type == "int")
+            {
+                if (int.TryParse(value, out outint))
+                {
+                    JObject jObject = new JObject(
+                     new JProperty(name, value, type));
+                    char[] split = read.ToCharArray();
+                    split[split.Length - 1] = ',';
+                    split[3] = ' ';
+                    string writeone = new string(split);
+                    char[] splitt = jObject.ToString().ToCharArray();
+                    splitt[0] = ' ';
+                    string writetwo = new string(splitt);
+                    File.WriteAllText("변수.json", writeone + writetwo);
+                }
+                else
+                {
+                    File.WriteAllText("err.log",File.ReadAllText("err.log") + "\n" + 계수기 + "번째 줄: 정수변수 안에 실수 혹은 문자를 넣을 수 없습니다.");
+                }
+            }
+            if (type == "string")
+            {
+                JObject jObject = new JObject(
+                      new JProperty(name, value, type));
+                char[] split = read.ToCharArray();
+                split[split.Length - 1] = ',';
+                split[3] = ' ';
+                string writeone = new string(split);
+                char[] splitt = jObject.ToString().ToCharArray();
+                splitt[0] = ' ';
+                string writetwo = new string(splitt);
+                File.WriteAllText("변수.json", writeone + writetwo);
+
+            }
+            if (type == "decimal" && decimal.TryParse(value, out outdecimal))
             {
                 JObject jObject = new JObject(
                    new JProperty(name, value, type));
@@ -76,7 +108,6 @@ namespace koreanscript_csharp
                 File.WriteAllText("변수.json", writeone + writetwo);
             }
 
-            
         final:;
         }
     }
