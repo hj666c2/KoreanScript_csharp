@@ -45,6 +45,8 @@ namespace koreanscript_csharp
         public async Task writevar(string type,string name, string value, int 계수기)
         {
             await Task.Delay(1);
+            int outint;
+            int outdecimal;
             string read = File.ReadAllText("변수.json");
             switch (type)
             {
@@ -60,18 +62,21 @@ namespace koreanscript_csharp
                     type = "decimal";
                     break;
             }
-            if (type == "int" && value != "") { }
+            if (type == "int" && int.TryParse(value, out outint))
+            {
+                JObject jObject = new JObject(
+                   new JProperty(name, value, type));
+                char[] split = read.ToCharArray();
+                split[split.Length - 1] = ',';
+                split[3] = ' ';
+                string writeone = new string(split);
+                char[] splitt = jObject.ToString().ToCharArray();
+                splitt[0] = ' ';
+                string writetwo = new string(splitt);
+                File.WriteAllText("변수.json", writeone + writetwo);
+            }
 
-            JObject jObject = new JObject(
-                new JProperty(name, value, type));
-            char[] split = read.ToCharArray();
-            split[split.Length - 1] = ',';
-            split[3] = ' ';
-            string writeone = new string(split);
-            char[] splitt = jObject.ToString().ToCharArray();
-            splitt[0] = ' ';
-            string writetwo = new string(splitt);
-            File.WriteAllText("변수.json", writeone + writetwo);
+            
         final:;
         }
     }
