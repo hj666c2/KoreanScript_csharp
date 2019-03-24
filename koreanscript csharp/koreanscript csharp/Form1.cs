@@ -22,6 +22,7 @@ namespace koreanscript_csharp
         private async void button1_Click(object sender, EventArgs e)
         {
             File.WriteAllText("변수.json","{\n\n}"); //변수초기화
+            File.WriteAllText("err.log", "");
             string 입력 = richTextBox1.Text;
             string[] 한줄 = 입력.Split('\n');
             string[] 띄어쓰기 = null;
@@ -35,10 +36,15 @@ namespace koreanscript_csharp
                     await writevar(띄어쓰기[0],띄어쓰기[1], 띄어쓰기[2],계수기와1);
                 }
                 else if (띄어쓰기[0] == "말하기") { }
-                richTextBox2.Text = richTextBox2.Text + "\n완료";
             }
-            goto go;
-        go:;
+            if (File.ReadAllText("err.log") != "")
+            {
+                richTextBox2.Text = File.ReadAllText("err.log");
+            }
+            else
+            {
+                richTextBox2.Text = "정상";
+            }
         }
 
 
@@ -82,6 +88,13 @@ namespace koreanscript_csharp
             }
             if (type == "string")
             {
+                string[] textbox = richTextBox1.Text.Split(' ');
+                value = "";
+                for (int a = 2;a <= textbox.Length - 1 ; a++)
+                {
+                    value = value + " " +  textbox[a];
+                }
+                char[] array = value.ToCharArray();
                 JObject jObject = new JObject(
                       new JProperty(name, value, type));
                 char[] split = read.ToCharArray();
