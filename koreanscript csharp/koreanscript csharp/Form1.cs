@@ -94,18 +94,25 @@ namespace koreanscript_csharp
                 File.WriteAllText("변수.json", writeone + writetwo);
 
             }
-            if (type == "decimal" && decimal.TryParse(value, out outdecimal))
+            if (type == "decimal")
             {
-                JObject jObject = new JObject(
-                   new JProperty(name, value, type));
-                char[] split = read.ToCharArray();
-                split[split.Length - 1] = ',';
-                split[3] = ' ';
-                string writeone = new string(split);
-                char[] splitt = jObject.ToString().ToCharArray();
-                splitt[0] = ' ';
-                string writetwo = new string(splitt);
-                File.WriteAllText("변수.json", writeone + writetwo);
+                if (decimal.TryParse(value, out outdecimal))
+                {
+                    JObject jObject = new JObject(
+                     new JProperty(name, value, type));
+                    char[] split = read.ToCharArray();
+                    split[split.Length - 1] = ',';
+                    split[3] = ' ';
+                    string writeone = new string(split);
+                    char[] splitt = jObject.ToString().ToCharArray();
+                    splitt[0] = ' ';
+                    string writetwo = new string(splitt);
+                    File.WriteAllText("변수.json", writeone + writetwo);
+                }
+                else
+                {
+                    File.WriteAllText("err.log", File.ReadAllText("err.log") + "\n" + 계수기 + "번째 줄: 실수변수 안에 문자를 넣을 수 없습니다.");
+                }
             }
 
         final:;
