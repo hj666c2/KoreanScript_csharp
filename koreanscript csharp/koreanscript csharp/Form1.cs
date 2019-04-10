@@ -23,6 +23,7 @@ namespace koreanscript_csharp
         {
             File.WriteAllText("변수.json","{\n\n}"); //변수초기화
             File.WriteAllText("err.log", "");
+            string output = null;
             string 입력 = richTextBox1.Text;
             string[] 한줄 = 입력.Split('\n');
             string[] 띄어쓰기 = null;
@@ -33,27 +34,39 @@ namespace koreanscript_csharp
                 계수기와1 = 계수기 + 1;
                 if (띄어쓰기[0] == "정수변수" || 띄어쓰기[0] == "문자변수" || 띄어쓰기[0] == "실수변수")
                 {
-                    await writevar(띄어쓰기[0],띄어쓰기[1], 띄어쓰기[2],계수기와1);
+                    await writevar(띄어쓰기[0],띄어쓰기[1], 띄어쓰기[2],계수기와1, 띄어쓰기);
                 }
-                else if (띄어쓰기[0] == "말하기") { }
+                else if (띄어쓰기[0] == "말하기")
+                {
+                    output += 띄어쓰기[1];
+                    for (int a = 2; a <= 띄어쓰기.Length - 1; a++)
+                    {
+                        output = output + " " + 띄어쓰기[a];
+                    }
+                }
             }
             if (File.ReadAllText("err.log") != "")
             {
                 richTextBox2.Text = File.ReadAllText("err.log");
+                goto final;
             }
             else
             {
-                richTextBox2.Text = "정상";
+                richTextBox2.Text = "";
+                richTextBox2.Text = output;
             }
+
+        final:;
         }
 
 
-        public async Task writevar(string type,string name, string value, int 계수기)
+        public async Task writevar(string type,string name, string value, int 계수기, string[] 띄어쓰기)
         {
             await Task.Delay(1);
             int outint;
             decimal outdecimal;
             string read = File.ReadAllText("변수.json");
+            JObject json = JObject.Parse(read);
             switch (type)
             {
                 case "정수변수":
@@ -70,65 +83,50 @@ namespace koreanscript_csharp
             {
                 if (int.TryParse(value, out outint))
                 {
-                    JObject jObject = new JObject(
-                     new JProperty(name, value, type));
-                    char[] split = read.ToCharArray();
-                    split[split.Length - 1] = ',';
-                    split[3] = ' ';
-                    string writeone = new string(split);
-                    char[] splitt = jObject.ToString().ToCharArray();
-                    splitt[0] = ' ';
-                    string writetwo = new string(splitt);
-                    File.WriteAllText("변수.json", writeone + writetwo);
+                    JObject writeint = new JObject();
+                    writeint.Add("value", value);
+                    writeint.Add("type", type);
+                    json.Add(name,writeint);
+                    File.WriteAllText("변수.json",json.ToString());
+
                 }
                 else
                 {
                     File.WriteAllText("err.log",File.ReadAllText("err.log") + "\n" + 계수기 + "번째 줄: 정수변수 안에 실수 혹은 문자를 넣을 수 없습니다.");
                 }
             }
-            if (type == "string")
+            else if (type == "string")
             {
-                string[] textbox = richTextBox1.Text.Split(' ');
-                value = "";
-                for (int a = 2;a <= textbox.Length - 1 ; a++)
+                string vvalue = "";
+                for(int a = 2;a < 띄어쓰기.Length ; a++)
                 {
-                    value = value + " " +  textbox[a];
+                    vvalue += " " + 띄어쓰기[a];
                 }
-                char[] array = value.ToCharArray();
-                JObject jObject = new JObject(
-                      new JProperty(name, value, type));
-                char[] split = read.ToCharArray();
-                split[split.Length - 1] = ',';
-                split[3] = ' ';
-                string writeone = new string(split);
-                char[] splitt = jObject.ToString().ToCharArray();
-                splitt[0] = ' ';
-                string writetwo = new string(splitt);
-                File.WriteAllText("변수.json", writeone + writetwo);
+                char[] split = vvalue.ToCharArray();
+                split[0] = '\0';
+                vvalue = new string(split);
+                JObject writeint = new JObject();
+                writeint.Add("value", vvalue);
+                writeint.Add("type", type);
+                json.Add(name, writeint);
+                File.WriteAllText("변수.json", json.ToString());
 
             }
-            if (type == "decimal")
+            else if (type == "decimal")
             {
                 if (decimal.TryParse(value, out outdecimal))
                 {
-                    JObject jObject = new JObject(
-                     new JProperty(name, value, type));
-                    char[] split = read.ToCharArray();
-                    split[split.Length - 1] = ',';
-                    split[3] = ' ';
-                    string writeone = new string(split);
-                    char[] splitt = jObject.ToString().ToCharArray();
-                    splitt[0] = ' ';
-                    string writetwo = new string(splitt);
-                    File.WriteAllText("변수.json", writeone + writetwo);
+                    JObject writeint = new JObject();
+                    writeint.Add("value", value);
+                    writeint.Add("type", type);
+                    json.Add(name, writeint);
+                    File.WriteAllText("변수.json", json.ToString());
                 }
                 else
                 {
                     File.WriteAllText("err.log", File.ReadAllText("err.log") + "\n" + 계수기 + "번째 줄: 실수변수 안에 문자를 넣을 수 없습니다.");
                 }
             }
-
-        final:;
         }
     }
 }

@@ -20,7 +20,6 @@ C:\Users\hj666\Desktop\KoreanScript_csharp\koreanscript csharp\koreanscript csha
 C:\Users\hj666\Desktop\KoreanScript_csharp\koreanscript csharp\koreanscript csharp\bin\Debug\Newtonsoft.Json.dll
 C:\Users\hj666\Desktop\KoreanScript_csharp\koreanscript csharp\koreanscript csharp\bin\Debug\Newtonsoft.Json.pdb
 C:\Users\hj666\Desktop\KoreanScript_csharp\koreanscript csharp\koreanscript csharp\bin\Debug\Newtonsoft.Json.xml
-C:\Users\hj666\Desktop\KoreanScript_csharp\koreanscript csharp\koreanscript csharp\obj\Debug\koreanscript_csharp.variable.resources
 C:\Users\hj666\Desktop\KoreanScript_csharp\koreanscript csharp\koreanscript csharp\obj\Debug\koreanscript csharp.csproj.CopyComplete
 C:\Users\hj666\Desktop\프로그래밍\KoreanScript_csharp\koreanscript csharp\koreanscript csharp\obj\Debug\koreanscript csharp.csprojAssemblyReference.cache
 C:\Users\hj666\Desktop\프로그래밍\KoreanScript_csharp\koreanscript csharp\koreanscript csharp\obj\Debug\koreanscript_csharp.Form1.resources
@@ -36,3 +35,4 @@ C:\Users\hj666\Desktop\프로그래밍\KoreanScript_csharp\koreanscript csharp\k
 C:\Users\hj666\Desktop\프로그래밍\KoreanScript_csharp\koreanscript csharp\koreanscript csharp\bin\Debug\Newtonsoft.Json.pdb
 C:\Users\hj666\Desktop\프로그래밍\KoreanScript_csharp\koreanscript csharp\koreanscript csharp\bin\Debug\Newtonsoft.Json.xml
 C:\Users\hj666\Desktop\프로그래밍\KoreanScript_csharp\koreanscript csharp\koreanscript csharp\obj\Debug\koreanscript csharp.csproj.CopyComplete
+C:\Users\hj666\Desktop\KoreanScript_csharp\koreanscript csharp\koreanscript csharp\obj\Debug\koreanscript_csharp.Form1.resources
