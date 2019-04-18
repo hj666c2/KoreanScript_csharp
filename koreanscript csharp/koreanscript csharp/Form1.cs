@@ -52,7 +52,6 @@ namespace koreanscript_csharp
             }
             else
             {
-                richTextBox2.Text = "";
                 richTextBox2.Text = output;
             }
 
@@ -97,16 +96,17 @@ namespace koreanscript_csharp
             }
             else if (type == "string")
             {
-                string vvalue = "";
-                if(true)
+                string 쓸값 = "";
+                string[] 값부분 = new string[띄어쓰기.Length-2];
+                Array.Copy(띄어쓰기,2,값부분,0,띄어쓰기.Length-2);
+
+                if(값부분[0].Contains("\""))
                 {
+                    richTextBox2.Text = "됨";
                     //기능 준비중 (따옴표 있나 확인)
-                }                   
-                for(int a = 2;a < 띄어쓰기.Length ; a++)
-                {
                 }
                 JObject writeint = new JObject();
-                writeint.Add("value", vvalue);
+                writeint.Add("value", 쓸값);
                 writeint.Add("type", type);
                 json.Add(띄어쓰기[1], writeint);
                 File.WriteAllText("변수.json", json.ToString());
