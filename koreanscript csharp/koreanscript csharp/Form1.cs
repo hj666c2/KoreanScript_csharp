@@ -60,14 +60,15 @@ namespace koreanscript_csharp
         }
 
 
-        public async Task writevar(string type,string name, string value, int 계수기, string[] 띄어쓰기)
+        public async Task writevar(string 한줄, string[] 띄어쓰기, int 계수기)
         {
             await Task.Delay(1);
             int outint;
             decimal outdecimal;
             string read = File.ReadAllText("변수.json");
             JObject json = JObject.Parse(read);
-            switch (type)
+            string type = "";
+            switch (띄어쓰기[0])
             {
                 case "정수변수":
                     type = "int";
@@ -81,12 +82,12 @@ namespace koreanscript_csharp
             }
             if (type == "int")
             {
-                if (int.TryParse(value, out outint))
+                if (int.TryParse(띄어쓰기[2], out outint))
                 {
                     JObject writeint = new JObject();
-                    writeint.Add("value", value);
+                    writeint.Add("value", 띄어쓰기[2]);
                     writeint.Add("type", type);
-                    json.Add(name,writeint);
+                    json.Add(띄어쓰기[1],writeint);
                     File.WriteAllText("변수.json",json.ToString());
 
                 }
@@ -98,28 +99,28 @@ namespace koreanscript_csharp
             else if (type == "string")
             {
                 string vvalue = "";
+                if(true)
+                {
+                    //기능 준비중 (따옴표 있나 확인)
+                }                   
                 for(int a = 2;a < 띄어쓰기.Length ; a++)
                 {
-                    vvalue += " " + 띄어쓰기[a];
                 }
-                char[] split = vvalue.ToCharArray();
-                split[0] = '\0';
-                vvalue = new string(split);
                 JObject writeint = new JObject();
                 writeint.Add("value", vvalue);
                 writeint.Add("type", type);
-                json.Add(name, writeint);
+                json.Add(띄어쓰기[1], writeint);
                 File.WriteAllText("변수.json", json.ToString());
 
             }
             else if (type == "decimal")
             {
-                if (decimal.TryParse(value, out outdecimal))
+                if (decimal.TryParse(띄어쓰기[2], out outdecimal))
                 {
                     JObject writeint = new JObject();
-                    writeint.Add("value", value);
+                    writeint.Add("value", 띄어쓰기[2]);
                     writeint.Add("type", type);
-                    json.Add(name, writeint);
+                    json.Add(띄어쓰기[1], writeint);
                     File.WriteAllText("변수.json", json.ToString());
                 }
                 else
