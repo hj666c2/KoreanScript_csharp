@@ -34,7 +34,7 @@ namespace koreanscript_csharp
                 계수기와1 = 계수기 + 1;
                 if (띄어쓰기[0] == "정수변수" || 띄어쓰기[0] == "문자변수" || 띄어쓰기[0] == "실수변수")
                 {
-                    await writevar(띄어쓰기[0],띄어쓰기[1], 띄어쓰기[2],계수기와1, 띄어쓰기);
+                    await 변수쓰기(한줄[계수기],띄어쓰기,계수기와1);
                 }
                 else if (띄어쓰기[0] == "말하기")
                 {
@@ -60,9 +60,8 @@ namespace koreanscript_csharp
         }
 
 
-        public async Task writevar(string 한줄, string[] 띄어쓰기, int 계수기)
+        public async Task 변수쓰기(string 한줄, string[] 띄어쓰기, int 계수기)
         {
-            await Task.Delay(1);
             int outint;
             decimal outdecimal;
             string read = File.ReadAllText("변수.json");
