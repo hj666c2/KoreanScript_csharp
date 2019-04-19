@@ -91,7 +91,7 @@ namespace koreanscript_csharp
                 }
                 else
                 {
-                    File.WriteAllText("err.log",File.ReadAllText("err.log") + "\n" + 계수기 + "번째 줄: 정수변수 안에 실수 혹은 문자를 넣을 수 없습니다.");
+                    File.WriteAllText("err.log",File.ReadAllText("err.log") + 계수기 + "번째 줄: 정수변수 안에 실수 혹은 문자를 넣을 수 없습니다.\n");
                 }
             }
             else if (type == "string")
@@ -115,10 +115,13 @@ namespace koreanscript_csharp
                     }
                     else
                     {
-
+                        File.WriteAllText("err.log", File.ReadAllText("err.log") + 계수기 + "번째 줄: 문자변수는 시작과 끝에 \"가 있어야 합니다.\n");
                     }
                 }
-
+                else
+                {
+                    File.WriteAllText("err.log", File.ReadAllText("err.log") + 계수기 + "번째 줄: 문자변수는 시작과 끝에 \"가 있어야 합니다.\n");
+                }
             }
             else if (type == "decimal")
             {
@@ -132,7 +135,7 @@ namespace koreanscript_csharp
                 }
                 else
                 {
-                    File.WriteAllText("err.log", File.ReadAllText("err.log") + "\n" + 계수기 + "번째 줄: 실수변수 안에 문자를 넣을 수 없습니다.");
+                    File.WriteAllText("err.log", File.ReadAllText("err.log") + 계수기 + "번째 줄: 실수변수 안에 문자를 넣을 수 없습니다.\n");
                 }
             }
         }
