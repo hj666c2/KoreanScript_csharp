@@ -102,14 +102,22 @@ namespace koreanscript_csharp
 
                 if(값부분[0].Contains("\""))
                 {
-                    richTextBox2.Text = "됨";
-                    //기능 준비중 (따옴표 있나 확인)
+                    if (값부분[값부분.Length-1].Contains("\""))
+                    {
+                        값부분[0] = 값부분[0].Substring(1);
+                        값부분[값부분.Length - 1] = 값부분[값부분.Length - 1].Substring(0,값부분[값부분.Length-1].Length-1);
+                        쓸값 = string.Join(" ",값부분);
+                        JObject writeint = new JObject();
+                        writeint.Add("value", 쓸값);
+                        writeint.Add("type", type);
+                        json.Add(띄어쓰기[1], writeint);
+                        File.WriteAllText("변수.json", json.ToString());
+                    }
+                    else
+                    {
+
+                    }
                 }
-                JObject writeint = new JObject();
-                writeint.Add("value", 쓸값);
-                writeint.Add("type", type);
-                json.Add(띄어쓰기[1], writeint);
-                File.WriteAllText("변수.json", json.ToString());
 
             }
             else if (type == "decimal")
