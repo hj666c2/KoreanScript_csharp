@@ -139,5 +139,29 @@ namespace koreanscript_csharp
                 }
             }
         }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            SaveFileDialog save = new SaveFileDialog();
+            saveFileDialog1.Filter = "한글스크립트 파일|*.kost|메모장 파일|*.txt";
+            saveFileDialog1.Title = "소스코드 저장";
+            saveFileDialog1.ShowDialog();
+            if (saveFileDialog1.FileName != "")
+            {
+                File.WriteAllText(saveFileDialog1.FileName,richTextBox1.Text);
+            }
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog open = new OpenFileDialog();
+            openFileDialog1.Filter = "한글스크립트 파일|*.kost|메모장 파일|*.txt";
+            openFileDialog1.Title = "소스코드 열기";
+            openFileDialog1.ShowDialog();
+            if (openFileDialog1.FileName != "")
+            {
+                richTextBox1.Text = File.ReadAllText(openFileDialog1.FileName);
+            }
+        }
     }
 }
