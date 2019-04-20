@@ -1,14 +1,6 @@
 {
-  "정수": {
-    "value": "10",
-    "type": "int"
-  },
   "문자": {
-    "value": "헿",
+    "value": "문잠",
     "type": "string"
-  },
-  "실수": {
-    "value": "3.5",
-    "type": "decimal"
   }
 }

@@ -61,81 +61,91 @@ namespace koreanscript_csharp
 
         public async Task 변수쓰기(string 한줄, string[] 띄어쓰기, int 계수기)
         {
-            int outint;
-            decimal outdecimal;
-            string read = File.ReadAllText("변수.json");
-            JObject json = JObject.Parse(read);
-            string type = "";
-            switch (띄어쓰기[0])
+            try
             {
-                case "정수변수":
-                    type = "int";
-                    break;
-                case "문자변수":
-                    type = "string";
-                    break;
-                case "실수변수":
-                    type = "decimal";
-                    break;
+                string 변수읽기 = File.ReadAllText("변수.json");
+                JObject 검사 = JObject.Parse(변수읽기);
+                string 같은이름 = 검사[띄어쓰기[1]]["value"].ToString();
+                File.WriteAllText("err.log", $"{File.ReadAllText("err.log")}{계수기}번째 줄, 이미 같은 이름의 변수가 존재합니다.");
             }
-            if (type == "int")
+            catch
             {
-                if (int.TryParse(띄어쓰기[2], out outint))
+                int outint;
+                decimal outdecimal;
+                string read = File.ReadAllText("변수.json");
+                JObject json = JObject.Parse(read);
+                string type = "";
+                switch (띄어쓰기[0])
                 {
-                    JObject writeint = new JObject();
-                    writeint.Add("value", 띄어쓰기[2]);
-                    writeint.Add("type", type);
-                    json.Add(띄어쓰기[1],writeint);
-                    File.WriteAllText("변수.json",json.ToString());
-
+                    case "정수변수":
+                        type = "int";
+                        break;
+                    case "문자변수":
+                        type = "string";
+                        break;
+                    case "실수변수":
+                        type = "decimal";
+                        break;
                 }
-                else
+                if (type == "int")
                 {
-                    File.WriteAllText("err.log",File.ReadAllText("err.log") + 계수기 + "번째 줄: 정수변수 안에 실수 혹은 문자를 넣을 수 없습니다.\n");
-                }
-            }
-            else if (type == "string")
-            {
-                string 쓸값 = "";
-                string[] 값부분 = new string[띄어쓰기.Length-2];
-                Array.Copy(띄어쓰기,2,값부분,0,띄어쓰기.Length-2);
-
-                if(값부분[0].Contains("\""))
-                {
-                    if (값부분[값부분.Length-1].Contains("\""))
+                    if (int.TryParse(띄어쓰기[2], out outint))
                     {
-                        값부분[0] = 값부분[0].Substring(1);
-                        값부분[값부분.Length - 1] = 값부분[값부분.Length - 1].Substring(0,값부분[값부분.Length-1].Length-1);
-                        쓸값 = string.Join(" ",값부분);
                         JObject writeint = new JObject();
-                        writeint.Add("value", 쓸값);
+                        writeint.Add("value", 띄어쓰기[2]);
                         writeint.Add("type", type);
                         json.Add(띄어쓰기[1], writeint);
                         File.WriteAllText("변수.json", json.ToString());
+
+                    }
+                    else
+                    {
+                        File.WriteAllText("err.log", File.ReadAllText("err.log") + 계수기 + "번째 줄: 정수변수 안에 실수 혹은 문자를 넣을 수 없습니다.\n");
+                    }
+                }
+                else if (type == "string")
+                {
+                    string 쓸값 = "";
+                    string[] 값부분 = new string[띄어쓰기.Length - 2];
+                    Array.Copy(띄어쓰기, 2, 값부분, 0, 띄어쓰기.Length - 2);
+
+                    if (값부분[0].Contains("\""))
+                    {
+                        if (값부분[값부분.Length - 1].Contains("\""))
+                        {
+                            값부분[0] = 값부분[0].Substring(1);
+                            값부분[값부분.Length - 1] = 값부분[값부분.Length - 1].Substring(0, 값부분[값부분.Length - 1].Length - 1);
+                            쓸값 = string.Join(" ", 값부분);
+                            JObject writeint = new JObject();
+                            writeint.Add("value", 쓸값);
+                            writeint.Add("type", type);
+                            json.Add(띄어쓰기[1], writeint);
+                            File.WriteAllText("변수.json", json.ToString());
+                        }
+                        else
+                        {
+                            File.WriteAllText("err.log", File.ReadAllText("err.log") + 계수기 + "번째 줄: 문자변수는 시작과 끝에 \"가 있어야 합니다.\n");
+                        }
                     }
                     else
                     {
                         File.WriteAllText("err.log", File.ReadAllText("err.log") + 계수기 + "번째 줄: 문자변수는 시작과 끝에 \"가 있어야 합니다.\n");
                     }
                 }
-                else
+                else if (type == "decimal")
                 {
-                    File.WriteAllText("err.log", File.ReadAllText("err.log") + 계수기 + "번째 줄: 문자변수는 시작과 끝에 \"가 있어야 합니다.\n");
-                }
-            }
-            else if (type == "decimal")
-            {
-                if (decimal.TryParse(띄어쓰기[2], out outdecimal))
-                {
-                    JObject writeint = new JObject();
-                    writeint.Add("value", 띄어쓰기[2]);
-                    writeint.Add("type", type);
-                    json.Add(띄어쓰기[1], writeint);
-                    File.WriteAllText("변수.json", json.ToString());
-                }
-                else
-                {
-                    File.WriteAllText("err.log", File.ReadAllText("err.log") + 계수기 + "번째 줄: 실수변수 안에 문자를 넣을 수 없습니다.\n");
+                    if (decimal.TryParse(띄어쓰기[2], out outdecimal))
+                    {
+                        JObject writeint = new JObject();
+                        writeint.Add("value", 띄어쓰기[2]);
+                        writeint.Add("type", type);
+                        json.Add(띄어쓰기[1], writeint);
+                        File.WriteAllText("변수.json", json.ToString());
+                    }
+                    else
+                    {
+                        File.WriteAllText("err.log", File.ReadAllText("err.log") + 계수기 + "번째 줄: 실수변수 안에 문자를 넣을 수 없습니다.\n");
+                    }
                 }
             }
         }
