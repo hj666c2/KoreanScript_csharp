@@ -57,7 +57,8 @@ namespace koreanscript_csharp
                 }
                 else if (띄어쓰기[0] == "값지정")
                 {
-
+                    변수제어 변수 = new 변수제어();
+                    변수.값지정();
                 }
                 else
                 {
