@@ -4,7 +4,6 @@ using System.ComponentModel;
 using System.Data;
 using System.IO;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Newtonsoft.Json;
@@ -21,28 +20,48 @@ namespace koreanscript_csharp
 
         private async void button1_Click(object sender, EventArgs e)
         {
+
             File.WriteAllText("변수.json","{\n\n}"); //변수초기화
             File.WriteAllText("err.log", "");
-            string output = null;
+            string 출력 = null;
             string 입력 = richTextBox1.Text;
             string[] 한줄 = 입력.Split('\n');
-            string[] 띄어쓰기 = null;
+            string[] 띄어쓰기 = new string[] { };
             int 계수기와1 = 0;
             for (int 계수기 = 0; 계수기 < 한줄.Length;계수기++)
             {
                 띄어쓰기 = 한줄[계수기].Split(' ');
                 계수기와1 = 계수기 + 1;
-                if (띄어쓰기[0] == "정수변수" || 띄어쓰기[0] == "문자변수" || 띄어쓰기[0] == "실수변수")
+                
+                if (띄어쓰기[0].Contains(@"//"))
+                {
+                    continue;
+                }
+                else if (띄어쓰기[0] == "정수변수" || 띄어쓰기[0] == "문자변수" || 띄어쓰기[0] == "실수변수")
                 {
                     await 변수쓰기(한줄[계수기],띄어쓰기,계수기와1);
                 }
                 else if (띄어쓰기[0] == "말하기")
                 {
-                    output += 띄어쓰기[1];
-                    for (int a = 2; a <= 띄어쓰기.Length - 1; a++)
+                    string 변수읽기 = File.ReadAllText("변수.json");
+                    JObject 변수들 = JObject.Parse(변수읽기);
+                    try
                     {
-                        output = output + " " + 띄어쓰기[a];
+                        string 변수 = 변수들[띄어쓰기[1]]["value"].ToString();
+                        출력 += 변수;
                     }
+                    catch
+                    {
+                        File.WriteAllText("err.log",$"{File.ReadAllText("err.log")}{계수기와1}번째 줄, 해당하는 변수가 존재하지 않습니다.\n");
+                    }
+                }
+                else if (띄어쓰기[0] == "값지정")
+                {
+
+                }
+                else
+                {
+                    File.WriteAllText("err.log", $"{File.ReadAllText("err.log")}{계수기와1}번째 줄, 해당하는 명령어가 존재하지 않습니다.\n");
                 }
             }
             if (File.ReadAllText("err.log") != "")
@@ -52,7 +71,7 @@ namespace koreanscript_csharp
             }
             else
             {
-                richTextBox2.Text = output;
+                richTextBox2.Text = 출력;
             }
 
         final:;
@@ -87,6 +106,9 @@ namespace koreanscript_csharp
                         type = "decimal";
                         break;
                 }
+                string 쓸값 = "";
+                string[] 값부분 = new string[띄어쓰기.Length - 2];
+                Array.Copy(띄어쓰기, 2, 값부분, 0, 띄어쓰기.Length - 2);
                 if (type == "int")
                 {
                     if (int.TryParse(띄어쓰기[2], out outint))
@@ -105,9 +127,6 @@ namespace koreanscript_csharp
                 }
                 else if (type == "string")
                 {
-                    string 쓸값 = "";
-                    string[] 값부분 = new string[띄어쓰기.Length - 2];
-                    Array.Copy(띄어쓰기, 2, 값부분, 0, 띄어쓰기.Length - 2);
 
                     if (값부분[0].Contains("\""))
                     {
@@ -172,6 +191,17 @@ namespace koreanscript_csharp
             {
                 richTextBox1.Text = File.ReadAllText(openFileDialog1.FileName);
             }
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            richTextBox2.Text = "한글스크립트 C#버전 사용법\n" +
+                "주석 달기: //[내용] (예: //이것은 아무런 뜻 없는 주석)\n\n" +
+                "변수 선언\n" +
+                "  정수: 정수변수 [이름] [값] (예: 정수변수 정수 20)\n" +
+                "  실수: 실수변수 [이름] [값] (예: 실수변수 실수 15.8)\n" +
+                "  문자: 문자변수 [이름] \"[값]\" (예: 문자변수 문자 \"문자다\")\n\n" +
+                "말하기: 말하기 [변수이름] (예: 말하기 문자)";
         }
     }
 }

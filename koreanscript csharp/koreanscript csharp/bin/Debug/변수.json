@@ -1,6 +1,14 @@
 {
   "문자": {
-    "value": "문잠",
+    "value": "문자",
     "type": "string"
+  },
+  "정수": {
+    "value": "1",
+    "type": "int"
+  },
+  "실수": {
+    "value": "3.2",
+    "type": "decimal"
   }
 }
