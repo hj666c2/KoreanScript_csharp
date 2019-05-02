@@ -90,7 +90,6 @@ namespace koreanscript_csharp
             }
             catch
             {
-                int outint;
                 decimal outdecimal;
                 string read = File.ReadAllText("변수.json");
                 JObject json = JObject.Parse(read);
@@ -110,15 +109,24 @@ namespace koreanscript_csharp
                 string 쓸값 = "";
                 string[] 값부분 = new string[띄어쓰기.Length - 2];
                 Array.Copy(띄어쓰기, 2, 값부분, 0, 띄어쓰기.Length - 2);
+                int outlng = 0;
                 if (type == "int")
                 {
-                    if (int.TryParse(띄어쓰기[2], out outint))
+                    if (long.TryParse(띄어쓰기[2], out outlng))
                     {
-                        JObject writeint = new JObject();
-                        writeint.Add("value", 띄어쓰기[2]);
-                        writeint.Add("type", type);
-                        json.Add(띄어쓰기[1], writeint);
-                        File.WriteAllText("변수.json", json.ToString());
+                        try
+                        {
+                            int 테에스트 = int.Parse(띄어쓰기[2]);
+                            JObject writeint = new JObject();
+                            writeint.Add("value", 띄어쓰기[2]);
+                            writeint.Add("type", type);
+                            json.Add(띄어쓰기[1], writeint);
+                            File.WriteAllText("변수.json", json.ToString());
+                        }
+                        catch
+                        {
+                            File.WriteAllText("err.log", File.ReadAllText("err.log") + 계수기 + "번째 줄: 정수변수의 범위는 –2,147,483,648 ~ 2,147,483,647입니다. (범위를 초과하였습니다)\n");
+                        }
 
                     }
                     else
