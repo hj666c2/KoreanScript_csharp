@@ -166,6 +166,7 @@ namespace koreanscript_csharp
 
         private async void 시작ToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            richTextBox2.Text = "기다려 주세요...";
             if (richTextBox1.Text == "") { richTextBox2.Text = "명령어를 입력해 주세요."; }
             else
             {

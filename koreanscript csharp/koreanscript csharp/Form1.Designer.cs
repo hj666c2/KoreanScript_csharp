@@ -50,6 +50,8 @@
             // richTextBox2
             // 
             this.richTextBox2.BackColor = System.Drawing.Color.White;
+            this.richTextBox2.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.richTextBox2.Font = new System.Drawing.Font("굴림", 12F);
             this.richTextBox2.Location = new System.Drawing.Point(407, 27);
             this.richTextBox2.Name = "richTextBox2";
             this.richTextBox2.ReadOnly = true;
