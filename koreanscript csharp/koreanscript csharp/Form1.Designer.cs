@@ -29,109 +29,100 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
-            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
-            this.richTextBox2 = new System.Windows.Forms.RichTextBox();
-            this.button1 = new System.Windows.Forms.Button();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
-            this.button4 = new System.Windows.Forms.Button();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.panel1.SuspendLayout();
+            this.richTextBox2 = new System.Windows.Forms.RichTextBox();
+            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
+            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.파일ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.열기ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.저장ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.도움말ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.도움말보기전체ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.시작ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // richTextBox1
-            // 
-            this.richTextBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.richTextBox1.Location = new System.Drawing.Point(12, 99);
-            this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(365, 450);
-            this.richTextBox1.TabIndex = 0;
-            this.richTextBox1.Text = "";
-            // 
-            // richTextBox2
-            // 
-            this.richTextBox2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.richTextBox2.Location = new System.Drawing.Point(407, 99);
-            this.richTextBox2.Name = "richTextBox2";
-            this.richTextBox2.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.richTextBox2.Size = new System.Drawing.Size(365, 450);
-            this.richTextBox2.TabIndex = 1;
-            this.richTextBox2.Text = "";
-            // 
-            // button1
-            // 
-            this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.button1.AutoSize = true;
-            this.button1.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.button1.Location = new System.Drawing.Point(652, 12);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(120, 65);
-            this.button1.TabIndex = 2;
-            this.button1.Text = "▶(시작)";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // openFileDialog1
             // 
             this.openFileDialog1.FileName = "openFileDialog1";
             // 
-            // button2
+            // richTextBox2
             // 
-            this.button2.AutoSize = true;
-            this.button2.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.button2.Font = new System.Drawing.Font("Noto Sans CJK KR Regular", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button2.Location = new System.Drawing.Point(106, 12);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(90, 65);
-            this.button2.TabIndex = 3;
-            this.button2.Text = "불러오기";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
+            this.richTextBox2.BackColor = System.Drawing.Color.White;
+            this.richTextBox2.Location = new System.Drawing.Point(407, 27);
+            this.richTextBox2.Name = "richTextBox2";
+            this.richTextBox2.ReadOnly = true;
+            this.richTextBox2.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.richTextBox2.Size = new System.Drawing.Size(365, 522);
+            this.richTextBox2.TabIndex = 1;
+            this.richTextBox2.Text = "";
             // 
-            // button3
+            // richTextBox1
             // 
-            this.button3.AutoSize = true;
-            this.button3.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.button3.Font = new System.Drawing.Font("Noto Sans CJK KR Regular", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.button3.Location = new System.Drawing.Point(10, 12);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(90, 65);
-            this.button3.TabIndex = 4;
-            this.button3.Text = "저장하기";
-            this.button3.UseVisualStyleBackColor = true;
-            this.button3.Click += new System.EventHandler(this.button3_Click);
+            this.richTextBox1.Font = new System.Drawing.Font("굴림", 12F);
+            this.richTextBox1.Location = new System.Drawing.Point(12, 27);
+            this.richTextBox1.Name = "richTextBox1";
+            this.richTextBox1.Size = new System.Drawing.Size(365, 522);
+            this.richTextBox1.TabIndex = 0;
+            this.richTextBox1.Text = "";
             // 
-            // button4
+            // menuStrip1
             // 
-            this.button4.AutoSize = true;
-            this.button4.Cursor = System.Windows.Forms.Cursors.Help;
-            this.button4.Font = new System.Drawing.Font("Noto Sans CJK KR Regular", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.button4.Location = new System.Drawing.Point(202, 12);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(109, 65);
-            this.button4.TabIndex = 5;
-            this.button4.Text = "도움말 보기";
-            this.button4.UseVisualStyleBackColor = true;
-            this.button4.Click += new System.EventHandler(this.button4_Click);
+            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.파일ToolStripMenuItem,
+            this.도움말ToolStripMenuItem,
+            this.시작ToolStripMenuItem});
+            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip1.Name = "menuStrip1";
+            this.menuStrip1.Size = new System.Drawing.Size(784, 24);
+            this.menuStrip1.TabIndex = 6;
+            this.menuStrip1.Text = "menuStrip1";
             // 
-            // panel1
+            // 파일ToolStripMenuItem
             // 
-            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.panel1.Controls.Add(this.richTextBox1);
-            this.panel1.Controls.Add(this.richTextBox2);
-            this.panel1.Controls.Add(this.button4);
-            this.panel1.Controls.Add(this.button2);
-            this.panel1.Controls.Add(this.button3);
-            this.panel1.Controls.Add(this.button1);
-            this.panel1.Location = new System.Drawing.Point(0, 0);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(784, 561);
-            this.panel1.TabIndex = 6;
+            this.파일ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.열기ToolStripMenuItem,
+            this.저장ToolStripMenuItem});
+            this.파일ToolStripMenuItem.Name = "파일ToolStripMenuItem";
+            this.파일ToolStripMenuItem.Size = new System.Drawing.Size(43, 20);
+            this.파일ToolStripMenuItem.Text = "파일";
+            // 
+            // 열기ToolStripMenuItem
+            // 
+            this.열기ToolStripMenuItem.Name = "열기ToolStripMenuItem";
+            this.열기ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.열기ToolStripMenuItem.Text = "열기";
+            this.열기ToolStripMenuItem.Click += new System.EventHandler(this.열기ToolStripMenuItem_Click);
+            // 
+            // 저장ToolStripMenuItem
+            // 
+            this.저장ToolStripMenuItem.Name = "저장ToolStripMenuItem";
+            this.저장ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.저장ToolStripMenuItem.Text = "저장";
+            this.저장ToolStripMenuItem.Click += new System.EventHandler(this.저장ToolStripMenuItem_Click);
+            // 
+            // 도움말ToolStripMenuItem
+            // 
+            this.도움말ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.도움말보기전체ToolStripMenuItem});
+            this.도움말ToolStripMenuItem.Name = "도움말ToolStripMenuItem";
+            this.도움말ToolStripMenuItem.Size = new System.Drawing.Size(55, 20);
+            this.도움말ToolStripMenuItem.Text = "도움말";
+            // 
+            // 도움말보기전체ToolStripMenuItem
+            // 
+            this.도움말보기전체ToolStripMenuItem.Name = "도움말보기전체ToolStripMenuItem";
+            this.도움말보기전체ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.도움말보기전체ToolStripMenuItem.Text = "도움말 보기 (전체)";
+            this.도움말보기전체ToolStripMenuItem.Click += new System.EventHandler(this.도움말보기전체ToolStripMenuItem_Click);
+            // 
+            // 시작ToolStripMenuItem
+            // 
+            this.시작ToolStripMenuItem.Name = "시작ToolStripMenuItem";
+            this.시작ToolStripMenuItem.Size = new System.Drawing.Size(43, 20);
+            this.시작ToolStripMenuItem.Text = "시작";
+            this.시작ToolStripMenuItem.Click += new System.EventHandler(this.시작ToolStripMenuItem_Click);
             // 
             // Form1
             // 
@@ -139,27 +130,32 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.AutoSize = true;
             this.ClientSize = new System.Drawing.Size(784, 561);
-            this.Controls.Add(this.panel1);
+            this.Controls.Add(this.richTextBox2);
+            this.Controls.Add(this.menuStrip1);
+            this.Controls.Add(this.richTextBox1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MainMenuStrip = this.menuStrip1;
             this.Name = "Form1";
             this.Text = "Form1";
-            this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
+            this.menuStrip1.ResumeLayout(false);
+            this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
         #endregion
-
-        private System.Windows.Forms.RichTextBox richTextBox1;
-        private System.Windows.Forms.RichTextBox richTextBox2;
-        private System.Windows.Forms.Button button1;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button3;
         private System.Windows.Forms.SaveFileDialog saveFileDialog1;
-        private System.Windows.Forms.Button button4;
-        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.RichTextBox richTextBox2;
+        private System.Windows.Forms.RichTextBox richTextBox1;
+        private System.Windows.Forms.MenuStrip menuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem 파일ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 열기ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 저장ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 도움말ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 도움말보기전체ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 시작ToolStripMenuItem;
     }
 }
 
