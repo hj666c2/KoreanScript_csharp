@@ -51,12 +51,12 @@
             // 
             this.richTextBox2.BackColor = System.Drawing.Color.White;
             this.richTextBox2.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.richTextBox2.Font = new System.Drawing.Font("굴림", 12F);
-            this.richTextBox2.Location = new System.Drawing.Point(407, 27);
+            this.richTextBox2.Font = new System.Drawing.Font("굴림", 9F);
+            this.richTextBox2.Location = new System.Drawing.Point(12, 299);
             this.richTextBox2.Name = "richTextBox2";
             this.richTextBox2.ReadOnly = true;
             this.richTextBox2.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.richTextBox2.Size = new System.Drawing.Size(365, 522);
+            this.richTextBox2.Size = new System.Drawing.Size(760, 250);
             this.richTextBox2.TabIndex = 1;
             this.richTextBox2.Text = "";
             // 
@@ -65,7 +65,7 @@
             this.richTextBox1.Font = new System.Drawing.Font("굴림", 12F);
             this.richTextBox1.Location = new System.Drawing.Point(12, 27);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(365, 522);
+            this.richTextBox1.Size = new System.Drawing.Size(760, 250);
             this.richTextBox1.TabIndex = 0;
             this.richTextBox1.Text = "";
             // 
