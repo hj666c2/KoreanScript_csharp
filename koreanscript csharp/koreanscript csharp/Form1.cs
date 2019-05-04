@@ -160,7 +160,8 @@ namespace koreanscript_csharp
                 "  정수: 정수변수 [이름] [값] (예: 정수변수 정수 20)\n" +
                 "  실수: 실수변수 [이름] [값] (예: 실수변수 실수 15.8)\n" +
                 "  문자: 문자변수 [이름] \"[값]\" (예: 문자변수 문자 \"문자다\")\n\n" +
-                "말하기: 말하기 [변수이름] (예: 말하기 문자)";
+                "값지정: 값지정 [변수이름] [값]\n\n" +
+                "말하기: 말하기 [변수이름] (예: 말하기 문자)\n";
         }
 
         private async void 시작ToolStripMenuItem_Click(object sender, EventArgs e)
