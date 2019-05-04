@@ -10,28 +10,61 @@ namespace koreanscript_csharp
 {
     class 변수제어
     {
-        public void 값지정(string[] 띄어쓰기)
+        public void 값지정(string[] 띄어쓰기, int 계수기)
         {
-            string 변수 = File.ReadAllText("변수.json");
-            JObject 변수읽기 = JObject.Parse(변수);
+            JObject 변수읽기 = JObject.Parse(File.ReadAllText("변수.json"));
             try
             {
                 int 정수출력;
                 decimal 실수출력;
                 string 문자출력;
                 string 타입 = 변수읽기[띄어쓰기[1]]["type"].ToString();
-                string 값 = 변수읽기[띄어쓰기[1]]["value"].ToString();
                 switch(타입)
                 {
                     case "int":
-                        if (int.TryParse(값, out 정수출력))
+                        if (int.TryParse(띄어쓰기[2], out 정수출력))
                         {
-
+                            변수읽기[띄어쓰기[1]]["value"] = 띄어쓰기[2];
+                            File.WriteAllText("변수.json", 변수읽기.ToString());
+                        }
+                        else
+                        {
+                            File.WriteAllText("err.log", $"{File.ReadAllText("err.log")}{계수기}번째 줄, 정수변수 안에 문자 혹은 실수를 넣을 수 없습니다.\n");
+                        }
+                        break;
+                    case "decimal":
+                        if (decimal.TryParse(띄어쓰기[2], out 실수출력))
+                        {
+                            변수읽기[띄어쓰기[1]]["value"] = 띄어쓰기[2];
+                            File.WriteAllText("변수.json", 변수읽기.ToString());
+                        }
+                        else
+                        {
+                            File.WriteAllText("err.log", $"{File.ReadAllText("err.log")}{계수기}번째 줄, 실수변수 안에 문자를 넣을 수 없습니다.\n");
+                        }
+                        break;
+                    case "string":
+                        if (띄어쓰기[2].IndexOf("\"") == 0 && 띄어쓰기[띄어쓰기.Length-1].LastIndexOf("\"") == 띄어쓰기[띄어쓰기.Length - 1].Length-1)
+                        {
+                            string[] 값부분 = new string[띄어쓰기.Length - 2];
+                            Array.Copy(띄어쓰기, 2, 값부분, 0, 띄어쓰기.Length - 2);
+                            string 쓰기 = string.Join(" ", 값부분);
+                            쓰기.Substring(0);
+                            쓰기.Substring(쓰기.Length-1);
+                            변수읽기[띄어쓰기[1]]["value"] = 쓰기;
+                            File.WriteAllText("변수.json",변수읽기.ToString());
+                        }
+                        else
+                        {
+                            File.WriteAllText("err.log", $"{File.ReadAllText("err.log")}{계수기}번째 줄, 문자변수값의 시작과 끝에는 \"이 필요합니다.\n");
                         }
                         break;
                 }
             }
-            catch { }
+            catch
+            {
+                File.WriteAllText("err.log",$"{File.ReadAllText("err.log")}{계수기}번째 줄, 현재 그 이름의 변수는 존재하지 않습니다.");
+            }
         }
     }
 }

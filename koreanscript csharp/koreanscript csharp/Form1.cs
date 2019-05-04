@@ -75,10 +75,9 @@ namespace koreanscript_csharp
                 }
                 else if (type == "string")
                 {
-
-                    if (값부분[0].Contains("\""))
+                    if (값부분[0].IndexOf("\"") == 0)
                     {
-                        if (값부분[값부분.Length - 1].Contains("\""))
+                        if (값부분[값부분.Length - 1].LastIndexOf("\"") == 값부분[값부분.Length - 1].Length - 1)
                         {
                             값부분[0] = 값부분[0].Substring(1);
                             값부분[값부분.Length - 1] = 값부분[값부분.Length - 1].Substring(0, 값부분[값부분.Length - 1].Length - 1);
@@ -213,7 +212,7 @@ namespace koreanscript_csharp
                         else if (띄어쓰기[0] == "값지정")
                         {
                             변수제어 변수 = new 변수제어();
-                            변수.값지정(띄어쓰기);
+                            변수.값지정(띄어쓰기, 계수기와1);
                         }
                         else
                         {
