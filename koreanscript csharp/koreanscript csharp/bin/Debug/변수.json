@@ -1,6 +1,10 @@
 {
-  "문자": {
-    "value": "문자",
+  "1": {
+    "value": "1번",
+    "type": "string"
+  },
+  "2": {
+    "value": "2번",
     "type": "string"
   }
 }

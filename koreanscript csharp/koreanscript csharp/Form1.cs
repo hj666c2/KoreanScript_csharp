@@ -203,7 +203,7 @@ namespace koreanscript_csharp
                             try
                             {
                                 string 변수 = 변수들[띄어쓰기[1]]["value"].ToString();
-                                출력 += 변수;
+                                출력 += 변수 + "\n";
                             }
                             catch
                             {
@@ -230,6 +230,16 @@ namespace koreanscript_csharp
                     richTextBox2.Text = 출력;
                 }
             }
+        }
+
+        private void 도움말보기변수ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void 도움말보기단축키ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            richTextBox2.Text = "";
         }
     }
 }

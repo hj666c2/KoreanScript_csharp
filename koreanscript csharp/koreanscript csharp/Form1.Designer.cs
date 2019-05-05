@@ -39,7 +39,9 @@
             this.저장ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.도움말ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.도움말보기전체ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.도움말보기변수ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.시작ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.도움말보기단축키ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -87,12 +89,14 @@
             this.열기ToolStripMenuItem,
             this.저장ToolStripMenuItem});
             this.파일ToolStripMenuItem.Name = "파일ToolStripMenuItem";
+            this.파일ToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.F)));
             this.파일ToolStripMenuItem.Size = new System.Drawing.Size(43, 20);
             this.파일ToolStripMenuItem.Text = "파일";
             // 
             // 열기ToolStripMenuItem
             // 
             this.열기ToolStripMenuItem.Name = "열기ToolStripMenuItem";
+            this.열기ToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O)));
             this.열기ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.열기ToolStripMenuItem.Text = "열기";
             this.열기ToolStripMenuItem.Click += new System.EventHandler(this.열기ToolStripMenuItem_Click);
@@ -100,6 +104,7 @@
             // 저장ToolStripMenuItem
             // 
             this.저장ToolStripMenuItem.Name = "저장ToolStripMenuItem";
+            this.저장ToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
             this.저장ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.저장ToolStripMenuItem.Text = "저장";
             this.저장ToolStripMenuItem.Click += new System.EventHandler(this.저장ToolStripMenuItem_Click);
@@ -107,24 +112,42 @@
             // 도움말ToolStripMenuItem
             // 
             this.도움말ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.도움말보기전체ToolStripMenuItem});
+            this.도움말보기전체ToolStripMenuItem,
+            this.도움말보기변수ToolStripMenuItem,
+            this.도움말보기단축키ToolStripMenuItem});
             this.도움말ToolStripMenuItem.Name = "도움말ToolStripMenuItem";
+            this.도움말ToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Q)));
             this.도움말ToolStripMenuItem.Size = new System.Drawing.Size(55, 20);
             this.도움말ToolStripMenuItem.Text = "도움말";
             // 
             // 도움말보기전체ToolStripMenuItem
             // 
             this.도움말보기전체ToolStripMenuItem.Name = "도움말보기전체ToolStripMenuItem";
-            this.도움말보기전체ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.도움말보기전체ToolStripMenuItem.Size = new System.Drawing.Size(186, 22);
             this.도움말보기전체ToolStripMenuItem.Text = "도움말 보기 (전체)";
             this.도움말보기전체ToolStripMenuItem.Click += new System.EventHandler(this.도움말보기전체ToolStripMenuItem_Click);
+            // 
+            // 도움말보기변수ToolStripMenuItem
+            // 
+            this.도움말보기변수ToolStripMenuItem.Name = "도움말보기변수ToolStripMenuItem";
+            this.도움말보기변수ToolStripMenuItem.Size = new System.Drawing.Size(186, 22);
+            this.도움말보기변수ToolStripMenuItem.Text = "도움말 보기 (변수)";
+            this.도움말보기변수ToolStripMenuItem.Click += new System.EventHandler(this.도움말보기변수ToolStripMenuItem_Click);
             // 
             // 시작ToolStripMenuItem
             // 
             this.시작ToolStripMenuItem.Name = "시작ToolStripMenuItem";
+            this.시작ToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.B)));
             this.시작ToolStripMenuItem.Size = new System.Drawing.Size(43, 20);
             this.시작ToolStripMenuItem.Text = "시작";
             this.시작ToolStripMenuItem.Click += new System.EventHandler(this.시작ToolStripMenuItem_Click);
+            // 
+            // 도움말보기단축키ToolStripMenuItem
+            // 
+            this.도움말보기단축키ToolStripMenuItem.Name = "도움말보기단축키ToolStripMenuItem";
+            this.도움말보기단축키ToolStripMenuItem.Size = new System.Drawing.Size(186, 22);
+            this.도움말보기단축키ToolStripMenuItem.Text = "도움말 보기 (단축키)";
+            this.도움말보기단축키ToolStripMenuItem.Click += new System.EventHandler(this.도움말보기단축키ToolStripMenuItem_Click);
             // 
             // Form1
             // 
@@ -158,6 +181,8 @@
         private System.Windows.Forms.ToolStripMenuItem 도움말ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 도움말보기전체ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 시작ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 도움말보기변수ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 도움말보기단축키ToolStripMenuItem;
     }
 }
 
