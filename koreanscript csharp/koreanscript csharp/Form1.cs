@@ -239,7 +239,10 @@ namespace koreanscript_csharp
 
         private void 도움말보기변수ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            richTextBox2.Text = "변수 도움말\n\n" +
+                "정수변수: 정수로 된 변수들을 넣을 수 있습니다. –2,147,483,648 ~ 2,147,483,647까지 넣을 수 있습니다.\n" +
+                "실수변수: 실수로 된 변수들을 넣을 수 있습니다. -79,228,162,514,264,337,593,543,950,335 ~ 79,228,16,514,264,337,593,543,950,335까지 넣을 수 있으며 소수점은 28자리까지 표현 가능합니다.\n" +
+                "문자변수: 문자로 된 변수들을 넣을 수 있습니다 값을 지정할 때 시작과 끝에 \"을 넣어줘야 합니다.";
         }
 
         private void 도움말보기단축키ToolStripMenuItem_Click(object sender, EventArgs e)
