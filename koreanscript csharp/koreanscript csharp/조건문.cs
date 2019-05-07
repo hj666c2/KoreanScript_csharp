@@ -56,15 +56,64 @@ namespace koreanscript_csharp
                                 if (변수1 != 변수2) 참거짓 = true;
                                 else 참거짓 = false;
                                 break;
+                            case ">=":
+                                if (int.Parse(변수1) >= int.Parse(변수2)) 참거짓 = true;
+                                else 참거짓 = false;
+                                break;
+                            case "<=":
+                                if (int.Parse(변수1) >= int.Parse(변수2)) 참거짓 = true;
+                                else 참거짓 = false;
+                                break;
+                            case "<":
+                                if (int.Parse(변수1) < int.Parse(변수2)) 참거짓 = true;
+                                else 참거짓 = false;
+                                break;
+                            case ">":
+                                if (int.Parse(변수1) > int.Parse(변수2)) 참거짓 = true;
+                                else 참거짓 = false;
+                                break;
                             default:
-                                File.WriteAllText("err.log", $"{File.ReadAllText("err.log")}{계수기}번째 줄: 해당하는 연산자는 없는 연산자이거나 이 변수 타입(문자)에 사용 할 수 없습니다.\n");
+                                File.WriteAllText("err.log", $"{File.ReadAllText("err.log")}{계수기}번째 줄: 해당하는 연산자는 없는 연산자 입니다.\n");
                                 break;
                         }
-
                     }
+                    else if (변수들[띄어쓰기[1]]["type"].ToString() == "decimal")
+                    {
+                        switch (띄어쓰기[2])
+                        {
+                            case "==":
+                                if (변수1 == 변수2) 참거짓 = true;
+                                else 참거짓 = false;
+                                break;
+                            case "!=":
+                                if (변수1 != 변수2) 참거짓 = true;
+                                else 참거짓 = false;
+                                break;
+                            case ">=":
+                                if (decimal.Parse(변수1) >= decimal.Parse(변수2)) 참거짓 = true;
+                                else 참거짓 = false;
+                                break;
+                            case "<=":
+                                if (decimal.Parse(변수1) >= decimal.Parse(변수2)) 참거짓 = true;
+                                else 참거짓 = false;
+                                break;
+                            case "<":
+                                if (decimal.Parse(변수1) < decimal.Parse(변수2)) 참거짓 = true;
+                                else 참거짓 = false;
+                                break;
+                            case ">":
+                                if (decimal.Parse(변수1) > decimal.Parse(변수2)) 참거짓 = true;
+                                else 참거짓 = false;
+                                break;
+                            default:
+                                File.WriteAllText("err.log", $"{File.ReadAllText("err.log")}{계수기}번째 줄: 해당하는 연산자는 없는 연산자 입니다.\n");
+                                break;
+                        }
+                    }
+                    if (참거짓 == false) 계수기 += int.Parse(띄어쓰기[4]);
                 }
             }
-            catch { }
+            catch { File.WriteAllText("err.log", $"{File.ReadAllText("err.log")}{계수기}번째 줄: 변수가 없거나 줄 수를 숫자가 아닌 것을 입력했습니다.\n"); }
         }
     }
 }
