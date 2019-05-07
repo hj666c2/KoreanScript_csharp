@@ -13,6 +13,7 @@ namespace koreanscript_csharp
 {
     public partial class Form1 : Form
     {
+        public int 계수기 = 0;
         public Form1()
         {
             InitializeComponent();
@@ -184,7 +185,7 @@ namespace koreanscript_csharp
                 string[] 한줄 = 입력.Split('\n');
                 string[] 띄어쓰기 = new string[] { };
                 int 계수기와1 = 0;
-                for (int 계수기 = 0; 계수기 < 한줄.Length; 계수기++)
+                for (계수기 = 0; 계수기 < 한줄.Length; 계수기++)
                 {
                     띄어쓰기 = 한줄[계수기].Split(' ');
                     계수기와1 = 계수기 + 1;
@@ -226,6 +227,11 @@ namespace koreanscript_csharp
                         {
                             변수제어 변수 = new 변수제어();
                             변수.값지정(띄어쓰기, 계수기와1);
+                        }
+                        else if (띄어쓰기[0] == "만약")
+                        {
+                            조건문 조건문 = new 조건문();
+                            await 조건문.만약에(띄어쓰기, 계수기와1);
                         }
                         else
                         {
