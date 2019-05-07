@@ -40,8 +40,8 @@
             this.도움말ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.도움말보기전체ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.도움말보기변수ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.시작ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.도움말보기단축키ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.시작ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -51,6 +51,7 @@
             // 
             // richTextBox2
             // 
+            this.richTextBox2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.richTextBox2.BackColor = System.Drawing.Color.White;
             this.richTextBox2.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.richTextBox2.Font = new System.Drawing.Font("굴림", 9F);
@@ -64,6 +65,7 @@
             // 
             // richTextBox1
             // 
+            this.richTextBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.richTextBox1.Font = new System.Drawing.Font("굴림", 12F);
             this.richTextBox1.Location = new System.Drawing.Point(12, 27);
             this.richTextBox1.Name = "richTextBox1";
@@ -89,9 +91,9 @@
             this.열기ToolStripMenuItem,
             this.저장ToolStripMenuItem});
             this.파일ToolStripMenuItem.Name = "파일ToolStripMenuItem";
-            this.파일ToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.F)));
-            this.파일ToolStripMenuItem.Size = new System.Drawing.Size(43, 20);
-            this.파일ToolStripMenuItem.Text = "파일";
+            this.파일ToolStripMenuItem.ShortcutKeyDisplayString = "";
+            this.파일ToolStripMenuItem.Size = new System.Drawing.Size(61, 20);
+            this.파일ToolStripMenuItem.Text = "파일 (&F)";
             // 
             // 열기ToolStripMenuItem
             // 
@@ -116,9 +118,8 @@
             this.도움말보기변수ToolStripMenuItem,
             this.도움말보기단축키ToolStripMenuItem});
             this.도움말ToolStripMenuItem.Name = "도움말ToolStripMenuItem";
-            this.도움말ToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Q)));
-            this.도움말ToolStripMenuItem.Size = new System.Drawing.Size(55, 20);
-            this.도움말ToolStripMenuItem.Text = "도움말";
+            this.도움말ToolStripMenuItem.Size = new System.Drawing.Size(76, 20);
+            this.도움말ToolStripMenuItem.Text = "도움말 (&Q)";
             // 
             // 도움말보기전체ToolStripMenuItem
             // 
@@ -134,6 +135,13 @@
             this.도움말보기변수ToolStripMenuItem.Text = "도움말 보기 (변수)";
             this.도움말보기변수ToolStripMenuItem.Click += new System.EventHandler(this.도움말보기변수ToolStripMenuItem_Click);
             // 
+            // 도움말보기단축키ToolStripMenuItem
+            // 
+            this.도움말보기단축키ToolStripMenuItem.Name = "도움말보기단축키ToolStripMenuItem";
+            this.도움말보기단축키ToolStripMenuItem.Size = new System.Drawing.Size(186, 22);
+            this.도움말보기단축키ToolStripMenuItem.Text = "도움말 보기 (단축키)";
+            this.도움말보기단축키ToolStripMenuItem.Click += new System.EventHandler(this.도움말보기단축키ToolStripMenuItem_Click);
+            // 
             // 시작ToolStripMenuItem
             // 
             this.시작ToolStripMenuItem.Name = "시작ToolStripMenuItem";
@@ -141,13 +149,6 @@
             this.시작ToolStripMenuItem.Size = new System.Drawing.Size(43, 20);
             this.시작ToolStripMenuItem.Text = "시작";
             this.시작ToolStripMenuItem.Click += new System.EventHandler(this.시작ToolStripMenuItem_Click);
-            // 
-            // 도움말보기단축키ToolStripMenuItem
-            // 
-            this.도움말보기단축키ToolStripMenuItem.Name = "도움말보기단축키ToolStripMenuItem";
-            this.도움말보기단축키ToolStripMenuItem.Size = new System.Drawing.Size(186, 22);
-            this.도움말보기단축키ToolStripMenuItem.Text = "도움말 보기 (단축키)";
-            this.도움말보기단축키ToolStripMenuItem.Click += new System.EventHandler(this.도움말보기단축키ToolStripMenuItem_Click);
             // 
             // Form1
             // 
