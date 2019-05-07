@@ -203,7 +203,12 @@ namespace koreanscript_csharp
                             try
                             {
                                 string 변수 = 변수들[띄어쓰기[1]]["value"].ToString();
-                                출력 += 변수 + "\n";
+                                if (변수.Contains(@"\줄"))
+                                {
+                                    string[] 줄나누기 = 변수.Split(new string[] { @"\줄" },StringSplitOptions.None);
+                                    변수 = string.Join("\n",줄나누기);
+                                }
+                                출력 += 변수;
                             }
                             catch
                             {
