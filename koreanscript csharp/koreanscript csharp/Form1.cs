@@ -127,11 +127,12 @@ namespace koreanscript_csharp
                 if (openFileDialog1.FileName != "")
                 {
                     richTextBox1.Text = File.ReadAllText(openFileDialog1.FileName);
+                    Text = "한글스크립트 " + openFileDialog1.FileName;
                 }
             }
             catch
             {
-
+                richTextBox1.Text = "해당 파일이 존재하지 않습니다.";
             }
         }
 
@@ -139,7 +140,12 @@ namespace koreanscript_csharp
         {
             try
             {
-
+                if (Text != "한글스크립트")
+                {
+                    string filename = Text;
+                    filename.Substring(7);
+                    File.WriteAllText(filename,richTextBox1.Text);
+                }
                 SaveFileDialog save = new SaveFileDialog();
                 saveFileDialog1.Filter = "한글스크립트 파일|*.kost|메모장 파일|*.txt";
                 saveFileDialog1.Title = "소스코드 저장";
@@ -147,6 +153,7 @@ namespace koreanscript_csharp
                 if (saveFileDialog1.FileName != "")
                 {
                     File.WriteAllText(saveFileDialog1.FileName, richTextBox1.Text);
+                    Text = "한글스크립트 " + saveFileDialog1.FileName;
                 }
             }
             catch { }
