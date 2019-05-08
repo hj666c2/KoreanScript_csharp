@@ -43,6 +43,7 @@
             this.도움말보기단축키ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.시작ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.멈추기ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -80,7 +81,8 @@
             this.파일ToolStripMenuItem,
             this.도움말ToolStripMenuItem,
             this.시작ToolStripMenuItem,
-            this.멈추기ToolStripMenuItem});
+            this.멈추기ToolStripMenuItem,
+            this.toolStripMenuItem1});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(784, 24);
@@ -159,10 +161,15 @@
             this.멈추기ToolStripMenuItem.Text = "멈추기";
             this.멈추기ToolStripMenuItem.Click += new System.EventHandler(this.멈추기ToolStripMenuItem_Click);
             // 
+            // toolStripMenuItem1
+            // 
+            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(122, 20);
+            // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
             this.ClientSize = new System.Drawing.Size(784, 561);
             this.Controls.Add(this.richTextBox2);
@@ -194,6 +201,7 @@
         private System.Windows.Forms.ToolStripMenuItem 도움말보기변수ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 도움말보기단축키ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 멈추기ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
     }
 }
 

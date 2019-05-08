@@ -56,12 +56,59 @@ namespace koreanscript_csharp
                     {
                         try
                         {
-                            int 테에스트 = int.Parse(띄어쓰기[2]);
-                            JObject writeint = new JObject();
-                            writeint.Add("value", 띄어쓰기[2]);
-                            writeint.Add("type", type);
-                            json.Add(띄어쓰기[1], writeint);
-                            File.WriteAllText("변수.json", json.ToString());
+                            if (띄어쓰기.Length == 5)
+                            {
+                                int 첫번째 = int.Parse(띄어쓰기[2]);
+                                int 두번째 = int.Parse(띄어쓰기[4]);
+                                string 쓰기 = "";
+                                if (!(int.TryParse(띄어쓰기[2], out 첫번째) && int.TryParse(띄어쓰기[4], out 두번째)))
+                                {
+                                    try
+                                    {
+                                        string 변수들 = File.ReadAllText("변수.json");
+                                        JObject 읽기 = JObject.Parse(변수들);
+                                        if (읽기[띄어쓰기[2]]["type"].ToString() != "int")
+                                        {
+
+                                        }
+                                    }
+                                }
+                                switch(띄어쓰기[3])
+                                {
+                                    case "+":
+                                        쓰기 = (첫번째 + 두번째).ToString();
+                                        break;
+                                    case "-":
+                                        쓰기 = (첫번째 - 두번째).ToString();
+                                        break;
+                                    case "*":
+                                        쓰기 = (첫번째 * 두번째).ToString();
+                                        break;
+                                    case "/":
+                                        쓰기 = (첫번째 / 두번째).ToString();
+                                        break;
+                                    case "%":
+                                        쓰기 = (첫번째 % 두번째).ToString();
+                                        break;
+                                    default:
+                                        File.WriteAllText("err.log", $"{File.ReadAllText("err.log")}{계수기}번째 줄, 해당하는 연산자는 없습니다.");
+                                        break;
+                                }
+                                JObject 정수쓰기 = new JObject();
+                                정수쓰기.Add("value", 쓰기);
+                                정수쓰기.Add("type", type);
+                                json.Add(띄어쓰기[1], 정수쓰기);
+                                File.WriteAllText("변수.json", json.ToString());
+                            }
+                            else
+                            {
+                                int 테에스트 = int.Parse(띄어쓰기[2]);
+                                JObject 정수쓰기 = new JObject();
+                                정수쓰기.Add("value", 띄어쓰기[2]);
+                                정수쓰기.Add("type", type);
+                                json.Add(띄어쓰기[1], 정수쓰기);
+                                File.WriteAllText("변수.json", json.ToString());
+                            }
                         }
                         catch
                         {
@@ -259,7 +306,7 @@ namespace koreanscript_csharp
             richTextBox2.Text = "변수 도움말\n\n" +
                 "변수 선언\n" +
                 "정수변수: 정수로 된 변수들을 넣을 수 있습니다. –2,147,483,648 ~ 2,147,483,647까지 넣을 수 있습니다.\n (사용 예시: 정수변수 정수 20)" +
-                "실수변수: 실수로 된 변수들을 넣을 수 있습니다. -79,228,162,514,264,337,593,543,950,335 ~ 79,228,16,514,264,337,593,543,950,335까지 넣을 수 있으며 소수점은 28자리까지 표현 가능합니다.\n(실수변수 실수 20.245)" +
+                "실수변수: 실수로 된 변수들을 넣을 수 있습니다. -79,228,162,514,264,337,593,543,950,335 ~ 79,228,16,514,264,337,593,543,950,335까지 넣을 수 있으며 소수점은 28자리까지 표현 가능합니다 (사용 예시: 실수변수 실수 20.245)\n" +
                 "문자변수: 문자로 된 변수들을 넣을 수 있습니다 값을 지정할 때 시작과 끝에 \"을 넣어줘야 합니다. (사용 예시: 문자변수 문자 \"문자임\")\n\n" +
                 "변수 값 지정\n" +
                 "정수변수: 정수로 된 변수들의 값을 바꿉니다. (사용 예시: 값지정 정수 51)\n" +
