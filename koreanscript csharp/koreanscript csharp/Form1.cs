@@ -185,59 +185,64 @@ namespace koreanscript_csharp
                 string[] 한줄 = 입력.Split('\n');
                 string[] 띄어쓰기 = new string[] { };
                 int 계수기와1 = 0;
-                for (계수기 = 0; 계수기 < 한줄.Length; 계수기++)
+                for (계수기 = 0; 계수기 < 한줄.Length; ++계수기)
                 {
-                    띄어쓰기 = 한줄[계수기].Split(' ');
-                    계수기와1 = 계수기 + 1;
-                    if (한줄[계수기] == "")
+                    try
                     {
-                        File.WriteAllText("err.log", $"{File.ReadAllText("err.log")}{계수기와1}번째 줄, 명령어를 입력해 주세요.\n");
-                    }
-                    else
-                    {
-
-                        if (띄어쓰기[0].IndexOf(@"//") == 0)
+                        띄어쓰기 = 한줄[계수기].Split(' ');
+                        계수기와1 = 계수기 + 1;
+                        if (한줄[계수기] == "")
                         {
-                            continue;
-                        }
-                        else if (띄어쓰기[0] == "정수변수" || 띄어쓰기[0] == "문자변수" || 띄어쓰기[0] == "실수변수")
-                        {
-                            await 변수쓰기(한줄[계수기], 띄어쓰기, 계수기와1);
-                        }
-                        else if (띄어쓰기[0] == "말하기")
-                        {
-                            string 변수읽기 = File.ReadAllText("변수.json");
-                            JObject 변수들 = JObject.Parse(변수읽기);
-                            try
-                            {
-                                string 변수 = 변수들[띄어쓰기[1]]["value"].ToString();
-                                if (변수.Contains(@"\줄"))
-                                {
-                                    string[] 줄나누기 = 변수.Split(new string[] { @"\줄" },StringSplitOptions.None);
-                                    변수 = string.Join("\n",줄나누기);
-                                }
-                                출력 += 변수;
-                            }
-                            catch
-                            {
-                                File.WriteAllText("err.log", $"{File.ReadAllText("err.log")}{계수기와1}번째 줄, 해당하는 변수가 존재하지 않습니다.\n");
-                            }
-                        }
-                        else if (띄어쓰기[0] == "값지정")
-                        {
-                            변수제어 변수 = new 변수제어();
-                            변수.값지정(띄어쓰기, 계수기와1);
-                        }
-                        else if (띄어쓰기[0] == "만약")
-                        {
-                            조건문 조건문 = new 조건문();
-                            await 조건문.만약에(띄어쓰기, 계수기와1);
+                            File.WriteAllText("err.log", $"{File.ReadAllText("err.log")}{계수기와1}번째 줄, 명령어를 입력해 주세요.\n");
                         }
                         else
                         {
-                            File.WriteAllText("err.log", $"{File.ReadAllText("err.log")}{계수기와1}번째 줄, 해당하는 명령어가 존재하지 않습니다.\n");
+
+                            if (띄어쓰기[0].IndexOf(@"//") == 0)
+                            {
+                                continue;
+                            }
+                            else if (띄어쓰기[0] == "정수변수" || 띄어쓰기[0] == "문자변수" || 띄어쓰기[0] == "실수변수")
+                            {
+                                await 변수쓰기(한줄[계수기], 띄어쓰기, 계수기와1);
+                            }
+                            else if (띄어쓰기[0] == "말하기")
+                            {
+                                string 변수읽기 = File.ReadAllText("변수.json");
+                                JObject 변수들 = JObject.Parse(변수읽기);
+                                try
+                                {
+                                    string 변수 = 변수들[띄어쓰기[1]]["value"].ToString();
+                                    if (변수.Contains(@"\줄"))
+                                    {
+                                        string[] 줄나누기 = 변수.Split(new string[] { @"\줄" }, StringSplitOptions.None);
+                                        변수 = string.Join("\n", 줄나누기);
+                                    }
+                                    출력 += 변수;
+                                }
+                                catch
+                                {
+                                    File.WriteAllText("err.log", $"{File.ReadAllText("err.log")}{계수기와1}번째 줄, 해당하는 변수가 존재하지 않습니다.\n");
+                                }
+                            }
+                            else if (띄어쓰기[0] == "값지정")
+                            {
+                                변수제어 변수 = new 변수제어();
+                                변수.값지정(띄어쓰기, 계수기와1);
+                            }
+                            else if (띄어쓰기[0] == "만약")
+                            {
+                                조건문 조건문 = new 조건문();
+                                await 조건문.만약에(띄어쓰기, 계수기와1);
+                            }
+                            else if (띄어쓰기[0] == "이동") { 계수기 = int.Parse(띄어쓰기[1]) - 1; await Task.Delay(100); }
+                            else
+                            {
+                                File.WriteAllText("err.log", $"{File.ReadAllText("err.log")}{계수기와1}번째 줄, 해당하는 명령어가 존재하지 않습니다.\n");
+                            }
                         }
                     }
+                    catch { break; }
                 }
                 if (File.ReadAllText("err.log") != "")
                 {
@@ -273,6 +278,11 @@ namespace koreanscript_csharp
                 "Alt + ?\n" +
                 "F: 파일" +
                 "Q: 도움말";
+        }
+
+        private void 멈추기ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            계수기 = 2147483647;
         }
     }
 }
