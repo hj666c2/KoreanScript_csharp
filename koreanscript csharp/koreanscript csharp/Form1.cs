@@ -139,25 +139,24 @@ namespace koreanscript_csharp
 
         private void 저장ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            try
-            {
                 if (Text != "한글스크립트")
                 {
                     string filename = Text;
-                    filename.Substring(7);
-                    File.WriteAllText(filename,richTextBox1.Text);
+                    filename = filename.Substring(6);
+                File.WriteAllText(filename, richTextBox1.Text);
                 }
-                SaveFileDialog save = new SaveFileDialog();
-                saveFileDialog1.Filter = "한글스크립트 파일|*.kost|메모장 파일|*.txt";
-                saveFileDialog1.Title = "소스코드 저장";
-                saveFileDialog1.ShowDialog();
-                if (saveFileDialog1.FileName != "")
+                else
                 {
-                    File.WriteAllText(saveFileDialog1.FileName, richTextBox1.Text);
-                    Text = "한글스크립트 " + saveFileDialog1.FileName;
+                    SaveFileDialog save = new SaveFileDialog();
+                    saveFileDialog1.Filter = "한글스크립트 파일|*.kost|메모장 파일|*.txt";
+                    saveFileDialog1.Title = "소스코드 저장";
+                    saveFileDialog1.ShowDialog();
+                    if (saveFileDialog1.FileName != "")
+                    {
+                        File.WriteAllText(saveFileDialog1.FileName, richTextBox1.Text);
+                        Text = "한글스크립트 " + saveFileDialog1.FileName;
+                    }
                 }
-            }
-            catch { }
         }
 
         private void 도움말보기전체ToolStripMenuItem_Click(object sender, EventArgs e)
