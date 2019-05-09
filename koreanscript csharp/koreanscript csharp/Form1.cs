@@ -31,76 +31,92 @@ namespace koreanscript_csharp
             }
             catch
             {
-                decimal outdecimal;
-                string type = "";
-                switch (띄어쓰기[0])
+                if (Char.IsNumber(띄어쓰기[1][0]) || 띄어쓰기[1][0] == '\"')
                 {
-                    case "정수변수":
-                        type = "int";
-                        break;
-                    case "문자변수":
-                        type = "string";
-                        break;
-                    case "실수변수":
-                        type = "decimal";
-                        break;
+                    File.WriteAllText("err.log", $"{File.ReadAllText("err.log")}{계수기}번째 줄, 변수 이름 첫 글자에는 \"와 숫자를 넣을 수 없습니다.");
                 }
-                string 쓸값 = "";
-                string[] 값부분 = new string[띄어쓰기.Length - 2];
-                Array.Copy(띄어쓰기, 2, 값부분, 0, 띄어쓰기.Length - 2);
-                int outint = 0;
-                if (type == "int")
+                else
                 {
-                    if (int.TryParse(띄어쓰기[2], out outint))
+                    decimal outdecimal;
+                    string type = "";
+                    switch (띄어쓰기[0])
                     {
-                        try
-                        {
-                            변수값.Add(띄어쓰기[1],띄어쓰기[2]);
-                            변수형식.Add(띄어쓰기[1], 띄어쓰기[2]);
-                        }
-                        catch
-                        {
-                            File.WriteAllText("err.log", File.ReadAllText("err.log") + 계수기 + "번째 줄: 정수변수의 범위는 –2,147,483,648 ~ 2,147,483,647입니다. (범위를 초과하였습니다)\n");
-                        }
-
+                        case "정수변수":
+                            type = "int";
+                            break;
+                        case "문자변수":
+                            type = "string";
+                            break;
+                        case "실수변수":
+                            type = "decimal";
+                            break;
                     }
-                    else
+                    string 쓸값 = "";
+                    string[] 값부분 = new string[띄어쓰기.Length - 2];
+                    Array.Copy(띄어쓰기, 2, 값부분, 0, 띄어쓰기.Length - 2);
+                    int outint = 0;
+                    if (type == "int")
                     {
-                        File.WriteAllText("err.log", File.ReadAllText("err.log") + 계수기 + "번째 줄: 정수변수 안에 실수 혹은 문자를 넣을 수 없습니다.\n");
-                    }
-                }
-                else if (type == "string")
-                {
-                    if (값부분[0].IndexOf("\"") == 0)
-                    {
-                        if (값부분[값부분.Length - 1].LastIndexOf("\"") == 값부분[값부분.Length - 1].Length - 1)
+                        int 정수값 = 0;
+                        if (띄어쓰기.Length == 5)
                         {
-                            값부분[0] = 값부분[0].Substring(1);
-                            값부분[값부분.Length - 1] = 값부분[값부분.Length - 1].Substring(0, 값부분[값부분.Length - 1].Length - 1);
-                            쓸값 = string.Join(" ", 값부분);
-                            변수값.Add(띄어쓰기[1],쓸값);
-                            변수형식.Add(띄어쓰기[1], "string");
+                            if (int.TryParse(띄어쓰기[2], out outint))
+                            {
+                                switch (띄어쓰기[2])
+                                {
+                                    case "+" :
+                                    정수값 += int.Parse(띄어쓰기[3]);
+                                        break;
+                                    case "-":
+                                        정수값 -= int.Parse(띄어쓰기[3]);
+                                        break;
+                                    case "*":
+                                        정수값 += int.Parse(띄어쓰기[3]);
+                                        break;
+                                    case "/":
+                                        정수값 += int.Parse(띄어쓰기[3]);
+                                        break;
+                                }
+                            }
+                            else
+                            {
+                                정수값 += int.Parse(띄어쓰기);
+                            }
+                        }
+                    }
+                    else if (type == "string")
+                    {
+                        if (값부분[0].IndexOf("\"") == 0)
+                        {
+                            if (값부분[값부분.Length - 1].LastIndexOf("\"") == 값부분[값부분.Length - 1].Length - 1)
+                            {
+                                값부분[0] = 값부분[0].Substring(1);
+                                값부분[값부분.Length - 1] = 값부분[값부분.Length - 1].Substring(0, 값부분[값부분.Length - 1].Length - 1);
+                                쓸값 = string.Join(" ", 값부분);
+                                변수값.Add(띄어쓰기[1], 쓸값);
+                                변수형식.Add(띄어쓰기[1], "string");
+                            }
+                            else
+                            {
+                                File.WriteAllText("err.log", File.ReadAllText("err.log") + 계수기 + "번째 줄: 문자변수는 시작과 끝에 \"가 있어야 합니다.\n");
+                            }
                         }
                         else
                         {
                             File.WriteAllText("err.log", File.ReadAllText("err.log") + 계수기 + "번째 줄: 문자변수는 시작과 끝에 \"가 있어야 합니다.\n");
                         }
                     }
-                    else
+                    else if (type == "decimal")
                     {
-                        File.WriteAllText("err.log", File.ReadAllText("err.log") + 계수기 + "번째 줄: 문자변수는 시작과 끝에 \"가 있어야 합니다.\n");
-                    }
-                }
-                else if (type == "decimal")
-                {
-                    if (decimal.TryParse(띄어쓰기[2], out outdecimal))
-                    {
-                        변수값.Add(띄어쓰기[1], 띄어쓰기[2]);
-                        변수형식.Add(띄어쓰기[1], "decimal");
-                    }
-                    else
-                    {
-                        File.WriteAllText("err.log", File.ReadAllText("err.log") + 계수기 + "번째 줄: 실수변수 안에 문자를 넣을 수 없습니다.\n");
+                        if (decimal.TryParse(띄어쓰기[2], out outdecimal))
+                        {
+                            변수값.Add(띄어쓰기[1], 띄어쓰기[2]);
+                            변수형식.Add(띄어쓰기[1], "decimal");
+                        }
+                        else
+                        {
+                            File.WriteAllText("err.log", File.ReadAllText("err.log") + 계수기 + "번째 줄: 실수변수 안에 문자를 넣을 수 없습니다.\n");
+                        }
                     }
                 }
             }
@@ -163,8 +179,8 @@ namespace koreanscript_csharp
         private async void 시작ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             richTextBox2.Text = "기다려 주세요...";
-            변수값 = null;
-            변수형식 = null;
+            변수값.Clear();
+            변수형식.Clear();
             if (richTextBox1.Text == "") { richTextBox2.Text = "명령어를 입력해 주세요."; }
             else
             {
@@ -262,10 +278,12 @@ namespace koreanscript_csharp
                 "Ctrl + ?\n" +
                 "O: 파일 열기\n" +
                 "S: 파일 저장\n" +
-                "B: 프로그램 시작\n\n" +
+                "B: 프로그램 시작\n" +
+                "F: 프로그램 종료\n\n" +
                 "Alt + ?\n" +
-                "F: 파일" +
-                "Q: 도움말";
+                "F: 파일\n" +
+                "Q: 도움말\n" +
+                "P: 프로그램";
         }
 
         private void 멈추기ToolStripMenuItem_Click(object sender, EventArgs e)
