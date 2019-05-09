@@ -9,6 +9,223 @@ namespace koreanscript_csharp
 {
     class 변수제어
     {
+        public async Task 변수쓰기(string 한줄, string[] 띄어쓰기, int 계수기)
+        {
+            Form1 폼1 = new Form1();
+            try
+            {
+                string 겁사 = 폼1.변수값[띄어쓰기[1]].ToString();
+                File.WriteAllText("err.log", $"{File.ReadAllText("err.log")}{계수기}번째 줄, 이미 같은 이름의 변수가 존재합니다.");
+            }
+            catch
+            {
+                if (Char.IsNumber(띄어쓰기[1][0]) || 띄어쓰기[1][0] == '\"')
+                {
+                    File.WriteAllText("err.log", $"{File.ReadAllText("err.log")}{계수기}번째 줄, 변수 이름 첫 글자에는 \"와 숫자를 넣을 수 없습니다.");
+                }
+                else
+                {
+                    decimal outdecimal;
+                    string type = "";
+                    switch (띄어쓰기[0])
+                    {
+                        case "정수변수":
+                            type = "int";
+                            break;
+                        case "문자변수":
+                            type = "string";
+                            break;
+                        case "실수변수":
+                            type = "decimal";
+                            break;
+                    }
+                    string 쓸값 = "";
+                    string[] 값부분 = new string[띄어쓰기.Length - 2];
+                    Array.Copy(띄어쓰기, 2, 값부분, 0, 띄어쓰기.Length - 2);
+                    int outint = 0;
+                    if (type == "int")
+                    {
+                        int 정수값 = 0;
+                        if (띄어쓰기.Length == 3)
+                        {
+                            if (int.TryParse(띄어쓰기[2], out outint))
+                            {
+                                정수값 += int.Parse(띄어쓰기[2]);
+                                폼1.변수형식.Add(띄어쓰기[1], "int");
+                                폼1.변수값.Add(띄어쓰기[1], 정수값.ToString());
+                            }
+                            else
+                            {
+                                try
+                                {
+                                    if (폼1.변수형식[띄어쓰기[2]].ToString() != "int")
+                                    { File.WriteAllText("err.log", File.ReadAllText("err.log") + 계수기 + "번째 줄: 정수변수에는 실수 혹은 문자를 넣을 수 없습니다.\n"); }
+                                    else
+                                    {
+                                        정수값 += int.Parse(폼1.변수값[띄어쓰기[2]].ToString());
+                                    }
+                                    폼1.변수형식.Add(띄어쓰기[1], "int");
+                                    폼1.변수값.Add(띄어쓰기[1], 정수값.ToString());
+                                }
+                                catch
+                                {
+                                    File.WriteAllText("err.log", File.ReadAllText("err.log") + 계수기 + "번째 줄: 해당하는 변수가 존재하지 않습니다.\n");
+                                }
+                            }
+                        }
+                        else if (띄어쓰기.Length == 5)
+                        {
+                            if (int.TryParse(띄어쓰기[2], out outint))
+                            {
+                                if (띄어쓰기[3] == "+" || 띄어쓰기[3] == "-" || 띄어쓰기[3] == "*" || 띄어쓰기[3] == "/" || 띄어쓰기[3] == "%")
+                                { 정수값 += int.Parse(띄어쓰기[2]); }
+                                else File.WriteAllText("err.log", File.ReadAllText("err.log") + 계수기 + "번째 줄: 해당하는 연산자는 존재하지 않습니다.\n");
+                            }
+                            else
+                            {
+                                try
+                                {
+                                    if (폼1.변수형식[띄어쓰기[2]].ToString() != "int")
+                                    { File.WriteAllText("err.log", File.ReadAllText("err.log") + 계수기 + "번째 줄: 정수변수에는 실수 혹은 문자를 넣을 수 없습니다.\n"); }
+                                    else
+                                    {
+                                        if (띄어쓰기[3] == "+" || 띄어쓰기[3] == "-" || 띄어쓰기[3] == "*" || 띄어쓰기[3] == "/" || 띄어쓰기[3] == "%")
+                                        { 정수값 += int.Parse(폼1.변수값[띄어쓰기[2]].ToString()); }
+                                        else File.WriteAllText("err.log", File.ReadAllText("err.log") + 계수기 + "번째 줄: 해당하는 연산자는 존재하지 않습니다.\n");
+                                    }
+                                }
+                                catch
+                                {
+                                    File.WriteAllText("err.log", File.ReadAllText("err.log") + 계수기 + "번째 줄: 해당하는 변수가 존재하지 않습니다.\n");
+                                }
+                            }
+                            if (int.TryParse(띄어쓰기[4], out outint))
+                            {
+                                switch (띄어쓰기[3])
+                                {
+                                    case "+":
+                                        정수값 += int.Parse(띄어쓰기[4]);
+                                        폼1.변수형식.Add(띄어쓰기[1], "int");
+                                        폼1.변수값.Add(띄어쓰기[1], 정수값.ToString());
+                                        break;
+                                    case "-":
+                                        정수값 -= int.Parse(띄어쓰기[4]);
+                                        폼1.변수형식.Add(띄어쓰기[1], "int");
+                                        폼1.변수값.Add(띄어쓰기[1], 정수값.ToString());
+                                        break;
+                                    case "*":
+                                        정수값 *= int.Parse(띄어쓰기[4]);
+                                        폼1.변수형식.Add(띄어쓰기[1], "int");
+                                        폼1.변수값.Add(띄어쓰기[1], 정수값.ToString());
+                                        break;
+                                    case "/":
+                                        정수값 /= int.Parse(띄어쓰기[4]);
+                                        폼1.변수형식.Add(띄어쓰기[1], "int");
+                                        폼1.변수값.Add(띄어쓰기[1], 정수값.ToString());
+                                        break;
+                                    case "%":
+                                        정수값 %= int.Parse(띄어쓰기[4]);
+                                        폼1.변수형식.Add(띄어쓰기[1], "int");
+                                        폼1.변수값.Add(띄어쓰기[1], 정수값.ToString());
+                                        break;
+                                    default:
+                                        File.WriteAllText("err.log", File.ReadAllText("err.log") + 계수기 + "번째 줄: 해당하는 연산자는 존재하지 않습니다.\n");
+                                        break;
+                                }
+                            }
+                            else
+                            {
+                                try
+                                {
+                                    if (폼1.변수형식[띄어쓰기[4]].ToString() == "int")
+                                    {
+                                        switch (띄어쓰기[3])
+                                        {
+                                            case "+":
+                                                정수값 += int.Parse(폼1.변수값[띄어쓰기[4]].ToString());
+                                                폼1.변수형식.Add(띄어쓰기[1], "int");
+                                                폼1.변수값.Add(띄어쓰기[1], 정수값.ToString());
+                                                break;
+                                            case "-":
+                                                정수값 -= int.Parse(폼1.변수값[띄어쓰기[4]].ToString());
+                                                폼1.변수형식.Add(띄어쓰기[1], "int");
+                                                폼1.변수값.Add(띄어쓰기[1], 정수값.ToString());
+                                                break;
+                                            case "*":
+                                                정수값 *= int.Parse(폼1.변수값[띄어쓰기[4]].ToString());
+                                                폼1.변수형식.Add(띄어쓰기[1], "int");
+                                                폼1.변수값.Add(띄어쓰기[1], 정수값.ToString());
+                                                break;
+                                            case "/":
+                                                정수값 /= int.Parse(폼1.변수값[띄어쓰기[4]].ToString());
+                                                폼1.변수형식.Add(띄어쓰기[1], "int");
+                                                폼1.변수값.Add(띄어쓰기[1], 정수값.ToString());
+                                                break;
+                                            case "%":
+                                                정수값 %= int.Parse(폼1.변수값[띄어쓰기[4]].ToString());
+                                                폼1.변수형식.Add(띄어쓰기[1], "int");
+                                                폼1.변수값.Add(띄어쓰기[1], 정수값.ToString());
+                                                break;
+                                            default:
+                                                File.WriteAllText("err.log", File.ReadAllText("err.log") + 계수기 + "번째 줄: 해당하는 연산자는 존재하지 않습니다.\n");
+                                                break;
+                                        }
+                                    }
+                                }
+                                catch
+                                {
+                                    File.WriteAllText("err.log", File.ReadAllText("err.log") + 계수기 + "번째 줄: 해당하는 변수가 존재하지 않습니다.\n");
+                                }
+                            }
+                        }
+                    }
+                    else if (type == "string")
+                    {
+                        if (값부분[0].IndexOf("\"") == 0)
+                        {
+                            if (값부분[값부분.Length - 1].LastIndexOf("\"") == 값부분[값부분.Length - 1].Length - 1)
+                            {
+                                값부분[0] = 값부분[0].Substring(1);
+                                값부분[값부분.Length - 1] = 값부분[값부분.Length - 1].Substring(0, 값부분[값부분.Length - 1].Length - 1);
+                                쓸값 = string.Join(" ", 값부분);
+                                폼1.변수값.Add(띄어쓰기[1], 쓸값);
+                                폼1.변수형식.Add(띄어쓰기[1], "string");
+                            }
+                            else
+                            {
+                                File.WriteAllText("err.log", File.ReadAllText("err.log") + 계수기 + "번째 줄: 문자변수는 시작과 끝에 \"가 있어야 합니다.\n");
+                            }
+                        }
+                        else
+                        {
+                            File.WriteAllText("err.log", File.ReadAllText("err.log") + 계수기 + "번째 줄: 문자변수는 시작과 끝에 \"가 있어야 합니다.\n");
+                        }
+                    }
+                    else if (type == "decimal")
+                    {
+                        if (decimal.TryParse(띄어쓰기[2], out outdecimal))
+                        {
+                            폼1.변수값.Add(띄어쓰기[1], 띄어쓰기[2]);
+                            폼1.변수형식.Add(띄어쓰기[1], "decimal");
+                        }
+                        else
+                        {
+                            File.WriteAllText("err.log", File.ReadAllText("err.log") + 계수기 + "번째 줄: 실수변수 안에 문자를 넣을 수 없습니다.\n");
+                        }
+                    }
+                }
+            }
+        }
+
+
+
+
+
+
+
+
+
+
         public void 값지정(string[] 띄어쓰기, int 계수기)
         {
             Form1 form1 = new Form1();
