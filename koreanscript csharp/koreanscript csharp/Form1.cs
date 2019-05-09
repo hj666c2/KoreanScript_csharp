@@ -62,25 +62,28 @@ namespace koreanscript_csharp
                         {
                             if (int.TryParse(띄어쓰기[2], out outint))
                             {
-                                switch (띄어쓰기[2])
-                                {
-                                    case "+" :
-                                    정수값 += int.Parse(띄어쓰기[3]);
-                                        break;
-                                    case "-":
-                                        정수값 -= int.Parse(띄어쓰기[3]);
-                                        break;
-                                    case "*":
-                                        정수값 += int.Parse(띄어쓰기[3]);
-                                        break;
-                                    case "/":
-                                        정수값 += int.Parse(띄어쓰기[3]);
-                                        break;
-                                }
+                                if (띄어쓰기[3] == "+" || 띄어쓰기[3] == "-" || 띄어쓰기[3] == "*" || 띄어쓰기[3] == "/" || 띄어쓰기[3] == "%")
+                                { 정수값 += int.Parse(띄어쓰기[2]); }
+                                else File.WriteAllText("err.log", File.ReadAllText("err.log") + 계수기 + "번째 줄: 해당하는 연산자는 존재하지 않습니다.\n");
                             }
                             else
                             {
-                                정수값 += int.Parse(띄어쓰기);
+                                try
+                                {
+                                    if (변수형식[띄어쓰기[3]].ToString() != "int")
+                                    { File.WriteAllText("err.log", File.ReadAllText("err.log") + 계수기 + "번째 줄: 정수변수에는 실수 혹은 문자를 넣을 수 없습니다.\n"); }
+                                    else
+                                    {
+                                        if (띄어쓰기[3] == "+" || 띄어쓰기[3] == "-" || 띄어쓰기[3] == "*" || 띄어쓰기[3] == "/" || 띄어쓰기[3] == "%")
+                                        { 정수값 += int.Parse(변수값[띄어쓰기[2]].ToString()); }
+                                        else File.WriteAllText("err.log", File.ReadAllText("err.log") + 계수기 + "번째 줄: 해당하는 연산자는 존재하지 않습니다.\n");
+
+                                    }
+                                }
+                                catch
+                                {
+                                    File.WriteAllText("err.log", File.ReadAllText("err.log") + 계수기 + "번째 줄: 해당하는 변수가 존재하지 않습니다.\n");
+                                }
                             }
                         }
                     }
