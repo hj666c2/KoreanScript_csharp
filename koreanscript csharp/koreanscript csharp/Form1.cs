@@ -56,7 +56,34 @@ namespace koreanscript_csharp
                     if (type == "int")
                     {
                         int 정수값 = 0;
-                        if (띄어쓰기.Length == 5)
+                        if (띄어쓰기.Length == 3)
+                        {
+                            if (int.TryParse(띄어쓰기[2], out outint))
+                            {
+                                정수값 += int.Parse(띄어쓰기[2]);
+                                변수형식.Add(띄어쓰기[1], "int");
+                                변수값.Add(띄어쓰기[1], 정수값.ToString());
+                            }
+                            else
+                            {
+                                try
+                                {
+                                    if (변수형식[띄어쓰기[2]].ToString() != "int")
+                                    { File.WriteAllText("err.log", File.ReadAllText("err.log") + 계수기 + "번째 줄: 정수변수에는 실수 혹은 문자를 넣을 수 없습니다.\n"); }
+                                    else
+                                    {
+                                        정수값 += int.Parse(변수값[띄어쓰기[2]].ToString());
+                                    }
+                                    변수형식.Add(띄어쓰기[1], "int");
+                                    변수값.Add(띄어쓰기[1], 정수값.ToString());
+                                }
+                                catch
+                                {
+                                    File.WriteAllText("err.log", File.ReadAllText("err.log") + 계수기 + "번째 줄: 해당하는 변수가 존재하지 않습니다.\n");
+                                }
+                            }
+                        }
+                        else if (띄어쓰기.Length == 5)
                         {
                             if (int.TryParse(띄어쓰기[2], out outint))
                             {
@@ -68,14 +95,91 @@ namespace koreanscript_csharp
                             {
                                 try
                                 {
-                                    if (변수형식[띄어쓰기[3]].ToString() != "int")
+                                    if (변수형식[띄어쓰기[2]].ToString() != "int")
                                     { File.WriteAllText("err.log", File.ReadAllText("err.log") + 계수기 + "번째 줄: 정수변수에는 실수 혹은 문자를 넣을 수 없습니다.\n"); }
                                     else
                                     {
                                         if (띄어쓰기[3] == "+" || 띄어쓰기[3] == "-" || 띄어쓰기[3] == "*" || 띄어쓰기[3] == "/" || 띄어쓰기[3] == "%")
                                         { 정수값 += int.Parse(변수값[띄어쓰기[2]].ToString()); }
                                         else File.WriteAllText("err.log", File.ReadAllText("err.log") + 계수기 + "번째 줄: 해당하는 연산자는 존재하지 않습니다.\n");
-
+                                    }
+                                }
+                                catch
+                                {
+                                    File.WriteAllText("err.log", File.ReadAllText("err.log") + 계수기 + "번째 줄: 해당하는 변수가 존재하지 않습니다.\n");
+                                }
+                            }
+                            if (int.TryParse(띄어쓰기[4], out outint))
+                            {
+                                switch (띄어쓰기[3])
+                                {
+                                    case "+":
+                                        정수값 += int.Parse(띄어쓰기[4]);
+                                        변수형식.Add(띄어쓰기[1], "int");
+                                        변수값.Add(띄어쓰기[1], 정수값.ToString());
+                                        break;
+                                    case "-":
+                                        정수값 -= int.Parse(띄어쓰기[4]);
+                                        변수형식.Add(띄어쓰기[1], "int");
+                                        변수값.Add(띄어쓰기[1], 정수값.ToString());
+                                        break;
+                                    case "*":
+                                        정수값 *= int.Parse(띄어쓰기[4]);
+                                        변수형식.Add(띄어쓰기[1], "int");
+                                        변수값.Add(띄어쓰기[1], 정수값.ToString());
+                                        break;
+                                    case "/":
+                                        정수값 /= int.Parse(띄어쓰기[4]);
+                                        변수형식.Add(띄어쓰기[1], "int");
+                                        변수값.Add(띄어쓰기[1], 정수값.ToString());
+                                        break;
+                                    case "%":
+                                        정수값 %= int.Parse(띄어쓰기[4]);
+                                        변수형식.Add(띄어쓰기[1], "int");
+                                        변수값.Add(띄어쓰기[1], 정수값.ToString());
+                                        break;
+                                    default:
+                                        File.WriteAllText("err.log", File.ReadAllText("err.log") + 계수기 + "번째 줄: 해당하는 연산자는 존재하지 않습니다.\n");
+                                        break;
+                                }
+                            }
+                            else
+                            {
+                                try
+                                {
+                                    if (변수형식[띄어쓰기[4]].ToString() == "int")
+                                    {
+                                        switch (띄어쓰기[3])
+                                        {
+                                            case "+":
+                                                정수값 += int.Parse(변수값[띄어쓰기[4]].ToString());
+                                                변수형식.Add(띄어쓰기[1], "int");
+                                                변수값.Add(띄어쓰기[1], 정수값.ToString());
+                                                break;
+                                            case "-":
+                                                정수값 -= int.Parse(변수값[띄어쓰기[4]].ToString());
+                                                변수형식.Add(띄어쓰기[1], "int");
+                                                변수값.Add(띄어쓰기[1], 정수값.ToString());
+                                                break;
+                                            case "*":
+                                                정수값 *= int.Parse(변수값[띄어쓰기[4]].ToString());
+                                                변수형식.Add(띄어쓰기[1], "int");
+                                                변수값.Add(띄어쓰기[1], 정수값.ToString());
+                                                break;
+                                            case "/":
+                                                정수값 /= int.Parse(변수값[띄어쓰기[4]].ToString());
+                                                변수형식.Add(띄어쓰기[1], "int");
+                                                변수값.Add(띄어쓰기[1], 정수값.ToString());
+                                                break;
+                                            case "%":
+                                                정수값 %= int.Parse(변수값[띄어쓰기[4]].ToString());
+                                                변수형식.Add(띄어쓰기[1], "int");
+                                                변수값.Add(띄어쓰기[1], 정수값.ToString());
+                                                break;
+                                            default:
+                                                File.WriteAllText("err.log", File.ReadAllText("err.log") + 계수기 + "번째 줄: 해당하는 연산자는 존재하지 않습니다.\n");
+                                                break;
+                                        }
                                     }
                                 }
                                 catch
@@ -177,7 +281,34 @@ namespace koreanscript_csharp
                 "말하기: 말하기 [변수이름] (예: 말하기 문자)\n";
         }
 
-        private async void 시작ToolStripMenuItem_Click(object sender, EventArgs e)
+        private void 도움말보기변수ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            richTextBox2.Text = "변수 도움말\n\n" +
+                "변수 선언\n" +
+                "정수변수: 정수로 된 변수들을 넣을 수 있습니다. –2,147,483,648 ~ 2,147,483,647까지 넣을 수 있습니다.\n (사용 예시: 정수변수 정수 20)" +
+                "실수변수: 실수로 된 변수들을 넣을 수 있습니다. -79,228,162,514,264,337,593,543,950,335 ~ 79,228,16,514,264,337,593,543,950,335까지 넣을 수 있으며 소수점은 28자리까지 표현 가능합니다 (사용 예시: 실수변수 실수 20.245)\n" +
+                "문자변수: 문자로 된 변수들을 넣을 수 있습니다 값을 지정할 때 시작과 끝에 \"을 넣어줘야 합니다. (사용 예시: 문자변수 문자 \"문자임\")\n\n" +
+                "변수 값 지정\n" +
+                "정수변수: 정수로 된 변수들의 값을 바꿉니다. (사용 예시: 값지정 정수 51)\n" +
+                "실수변수: 실수로 된 변수들의 값을 바꿉니다. (사용 예시: 값지정 실수 500.5981)\n" +
+                "문자변수: 문자로 된 변수들의 값을 바꿉니다. (사용 예시: 값지정 문자 \"문문자자\")";
+        }
+
+        private void 도움말보기단축키ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            richTextBox2.Text = "단축키 도움말 \n\n" +
+                "Ctrl + ?\n" +
+                "O: 파일 열기\n" +
+                "S: 파일 저장\n" +
+                "B: 프로그램 시작\n" +
+                "F: 프로그램 종료\n\n" +
+                "Alt + ?\n" +
+                "F: 파일\n" +
+                "Q: 도움말\n" +
+                "P: 프로그램";
+        }
+
+        private async void 시작ToolStripMenuItem1_Click(object sender, EventArgs e)
         {
             richTextBox2.Text = "기다려 주세요...";
             변수값.Clear();
@@ -260,34 +391,7 @@ namespace koreanscript_csharp
             }
         }
 
-        private void 도움말보기변수ToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            richTextBox2.Text = "변수 도움말\n\n" +
-                "변수 선언\n" +
-                "정수변수: 정수로 된 변수들을 넣을 수 있습니다. –2,147,483,648 ~ 2,147,483,647까지 넣을 수 있습니다.\n (사용 예시: 정수변수 정수 20)" +
-                "실수변수: 실수로 된 변수들을 넣을 수 있습니다. -79,228,162,514,264,337,593,543,950,335 ~ 79,228,16,514,264,337,593,543,950,335까지 넣을 수 있으며 소수점은 28자리까지 표현 가능합니다 (사용 예시: 실수변수 실수 20.245)\n" +
-                "문자변수: 문자로 된 변수들을 넣을 수 있습니다 값을 지정할 때 시작과 끝에 \"을 넣어줘야 합니다. (사용 예시: 문자변수 문자 \"문자임\")\n\n" +
-                "변수 값 지정\n" +
-                "정수변수: 정수로 된 변수들의 값을 바꿉니다. (사용 예시: 값지정 정수 51)\n" +
-                "실수변수: 실수로 된 변수들의 값을 바꿉니다. (사용 예시: 값지정 실수 500.5981)\n" +
-                "문자변수: 문자로 된 변수들의 값을 바꿉니다. (사용 예시: 값지정 문자 \"문문자자\")";
-        }
-
-        private void 도움말보기단축키ToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            richTextBox2.Text = "단축키 도움말 \n\n" +
-                "Ctrl + ?\n" +
-                "O: 파일 열기\n" +
-                "S: 파일 저장\n" +
-                "B: 프로그램 시작\n" +
-                "F: 프로그램 종료\n\n" +
-                "Alt + ?\n" +
-                "F: 파일\n" +
-                "Q: 도움말\n" +
-                "P: 프로그램";
-        }
-
-        private void 멈추기ToolStripMenuItem_Click(object sender, EventArgs e)
+        private void 종료ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             계수기 = 2147483647;
         }

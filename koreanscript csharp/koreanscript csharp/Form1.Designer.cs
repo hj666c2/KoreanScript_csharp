@@ -153,7 +153,6 @@
             this.시작ToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.B)));
             this.시작ToolStripMenuItem.Size = new System.Drawing.Size(62, 20);
             this.시작ToolStripMenuItem.Text = "실행 (&P)";
-            this.시작ToolStripMenuItem.Click += new System.EventHandler(this.시작ToolStripMenuItem_Click);
             // 
             // 시작ToolStripMenuItem1
             // 
@@ -161,6 +160,7 @@
             this.시작ToolStripMenuItem1.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.B)));
             this.시작ToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
             this.시작ToolStripMenuItem1.Text = "시작";
+            this.시작ToolStripMenuItem1.Click += new System.EventHandler(this.시작ToolStripMenuItem1_Click);
             // 
             // 종료ToolStripMenuItem
             // 
@@ -168,6 +168,7 @@
             this.종료ToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.E)));
             this.종료ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.종료ToolStripMenuItem.Text = "종료";
+            this.종료ToolStripMenuItem.Click += new System.EventHandler(this.종료ToolStripMenuItem_Click);
             // 
             // Form1
             // 
