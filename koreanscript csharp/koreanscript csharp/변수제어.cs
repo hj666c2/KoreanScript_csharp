@@ -181,24 +181,17 @@ namespace koreanscript_csharp
                     }
                     else if (type == "string")
                     {
-                        if (값부분[0].IndexOf("\"") == 0)
+                        if (값부분[0].IndexOf("\"") != 0 || (값부분[값부분.Length - 1].LastIndexOf("\"") != 값부분[값부분.Length - 1].Length - 1))
                         {
-                            if (값부분[값부분.Length - 1].LastIndexOf("\"") == 값부분[값부분.Length - 1].Length - 1)
-                            {
-                                값부분[0] = 값부분[0].Substring(1);
-                                값부분[값부분.Length - 1] = 값부분[값부분.Length - 1].Substring(0, 값부분[값부분.Length - 1].Length - 1);
-                                쓸값 = string.Join(" ", 값부분);
-                                폼1.변수값.Add(띄어쓰기[1], 쓸값);
-                                폼1.변수형식.Add(띄어쓰기[1], "string");
-                            }
-                            else
-                            {
-                                File.WriteAllText("err.log", File.ReadAllText("err.log") + 계수기 + "번째 줄: 문자변수는 시작과 끝에 \"가 있어야 합니다.\n");
-                            }
+
                         }
                         else
                         {
-                            File.WriteAllText("err.log", File.ReadAllText("err.log") + 계수기 + "번째 줄: 문자변수는 시작과 끝에 \"가 있어야 합니다.\n");
+                            값부분[0] = 값부분[0].Substring(1);
+                            값부분[값부분.Length - 1] = 값부분[값부분.Length - 1].Substring(0, 값부분[값부분.Length - 1].Length - 1);
+                            쓸값 = string.Join(" ", 값부분);
+                            폼1.변수값.Add(띄어쓰기[1], 쓸값);
+                            폼1.변수형식.Add(띄어쓰기[1], "string");
                         }
                     }
                     else if (type == "decimal")
