@@ -13,8 +13,8 @@ namespace koreanscript_csharp
         {
             try
             {
-                string 겁사 = 변수값[띄어쓰기[1]].ToString();
-                File.WriteAllText("err.log", $"{File.ReadAllText("err.log")}{계수기}번째 줄, 이미 같은 이름의 변수가 존재합니다.");
+                string 겁사 = 변수형식[띄어쓰기[1]].ToString();
+                File.WriteAllText("err.log", $"{File.ReadAllText("err.log")}{계수기}번째 줄, 이미 같은 이름의 변수가 존재합니다.\n");
             }
             catch
             {
@@ -233,18 +233,17 @@ namespace koreanscript_csharp
 
         public void 값지정(string[] 띄어쓰기, int 계수기)
         {
-            Form1 form1 = new Form1();
             try
             {
                 int 정수출력;
                 decimal 실수출력;
                 string 문자출력;
-                switch(form1.변수형식[띄어쓰기[1]])
+                switch(변수형식[띄어쓰기[1]])
                 {
                     case "int":
                         if (int.TryParse(띄어쓰기[2], out 정수출력))
                         {
-                            form1.변수값[띄어쓰기[2]] = 띄어쓰기[3];
+                            변수값[띄어쓰기[2]] = 띄어쓰기[3];
                         }
                         else
                         {
@@ -254,7 +253,7 @@ namespace koreanscript_csharp
                     case "decimal":
                         if (decimal.TryParse(띄어쓰기[2], out 실수출력))
                         {
-                            form1.변수값[띄어쓰기[1]] = 띄어쓰기[2];
+                            변수값[띄어쓰기[1]] = 띄어쓰기[2];
                         }
                         else
                         {
@@ -269,7 +268,7 @@ namespace koreanscript_csharp
                             string 쓰기 = string.Join(" ", 값부분);
                             쓰기.Substring(0);
                             쓰기.Substring(쓰기.Length-1);
-                            form1.변수값[띄어쓰기[1]] = 쓰기;
+                            변수값[띄어쓰기[1]] = 쓰기;
                         }
                         else
                         {

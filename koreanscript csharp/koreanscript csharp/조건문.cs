@@ -7,25 +7,24 @@ using System.Threading.Tasks;
 
 namespace koreanscript_csharp
 {
-    class 조건문
+    class 조건문 : Form1
     {
         public async Task 만약에(string[] 띄어쓰기, int 계수기)
         {
             bool 참거짓 = false;
-            Form1 폼1 = new Form1();
             try
             {
-                string 변수1 = 폼1.변수형식[띄어쓰기[1]].ToString();
-                string 변수2 = 폼1.변수형식[띄어쓰기[3]].ToString();
+                string 변수1 = 변수형식[띄어쓰기[1]].ToString();
+                string 변수2 = 변수형식[띄어쓰기[3]].ToString();
                 if (변수1 != 변수2)
                 {
                     File.WriteAllText("err.log", $"{File.ReadAllText("err.log")}{계수기}번째 줄: 변수가 서로 다른 타입입니다.\n");
                 }
                 else
                 {
-                    변수1 = 폼1.변수값[띄어쓰기[1]].ToString();
-                    변수2 = 폼1.변수값[띄어쓰기[3]].ToString();
-                    if (폼1.변수형식[띄어쓰기[1]].ToString() == "string")
+                    변수1 = 변수값[띄어쓰기[1]].ToString();
+                    변수2 = 변수값[띄어쓰기[3]].ToString();
+                    if (변수형식[띄어쓰기[1]].ToString() == "string")
                     {
                         switch (띄어쓰기[2])
                         {
@@ -42,7 +41,7 @@ namespace koreanscript_csharp
                                 break;
                         }
                     }
-                    else if (폼1.변수형식[띄어쓰기[1]].ToString() == "int")
+                    else if (변수형식[띄어쓰기[1]].ToString() == "int")
                     {
                         switch (띄어쓰기[2])
                         {
@@ -75,7 +74,7 @@ namespace koreanscript_csharp
                                 break;
                         }
                     }
-                    else if (폼1.변수형식[띄어쓰기[1]].ToString() == "decimal")
+                    else if (변수형식[띄어쓰기[1]].ToString() == "decimal")
                     {
                         switch (띄어쓰기[2])
                         {
@@ -108,6 +107,7 @@ namespace koreanscript_csharp
                                 break;
                         }
                     }
+                    Form1 폼1 = new Form1();
                     if (참거짓 == false) 폼1.계수기 += int.Parse(띄어쓰기[4]);
                 }
             }
