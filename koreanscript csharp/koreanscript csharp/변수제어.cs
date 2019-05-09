@@ -12,20 +12,18 @@ namespace koreanscript_csharp
     {
         public void 값지정(string[] 띄어쓰기, int 계수기)
         {
-            JObject 변수읽기 = JObject.Parse(File.ReadAllText("변수.json"));
+            Form1 form1 = new Form1();
             try
             {
                 int 정수출력;
                 decimal 실수출력;
                 string 문자출력;
-                string 타입 = 변수읽기[띄어쓰기[1]]["type"].ToString();
-                switch(타입)
+                switch(form1.변수형식[띄어쓰기[1]])
                 {
                     case "int":
                         if (int.TryParse(띄어쓰기[2], out 정수출력))
                         {
-                            변수읽기[띄어쓰기[1]]["value"] = 띄어쓰기[2];
-                            File.WriteAllText("변수.json", 변수읽기.ToString());
+                            form1.변수값[띄어쓰기[2]] = 띄어쓰기[3];
                         }
                         else
                         {
@@ -35,8 +33,7 @@ namespace koreanscript_csharp
                     case "decimal":
                         if (decimal.TryParse(띄어쓰기[2], out 실수출력))
                         {
-                            변수읽기[띄어쓰기[1]]["value"] = 띄어쓰기[2];
-                            File.WriteAllText("변수.json", 변수읽기.ToString());
+                            form1.변수값[띄어쓰기[1]] = 띄어쓰기[2];
                         }
                         else
                         {
@@ -51,8 +48,7 @@ namespace koreanscript_csharp
                             string 쓰기 = string.Join(" ", 값부분);
                             쓰기.Substring(0);
                             쓰기.Substring(쓰기.Length-1);
-                            변수읽기[띄어쓰기[1]]["value"] = 쓰기;
-                            File.WriteAllText("변수.json",변수읽기.ToString());
+                            form1.변수값[띄어쓰기[1]] = 쓰기;
                         }
                         else
                         {

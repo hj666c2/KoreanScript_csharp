@@ -13,21 +13,20 @@ namespace koreanscript_csharp
         public async Task 만약에(string[] 띄어쓰기, int 계수기)
         {
             bool 참거짓 = false;
-            string 변수읽기 = File.ReadAllText("변수.json");
+            Form1 폼1 = new Form1();
             try
             {
-                JObject 변수들 = JObject.Parse(변수읽기);
-                string 변수1 = 변수들[띄어쓰기[1]]["type"].ToString();
-                string 변수2 = 변수들[띄어쓰기[3]]["type"].ToString();
+                string 변수1 = 폼1.변수형식[띄어쓰기[1]].ToString();
+                string 변수2 = 폼1.변수형식[띄어쓰기[3]].ToString();
                 if (변수1 != 변수2)
                 {
                     File.WriteAllText("err.log", $"{File.ReadAllText("err.log")}{계수기}번째 줄: 변수가 서로 다른 타입입니다.\n");
                 }
                 else
                 {
-                    변수1 = 변수들[띄어쓰기[1]]["value"].ToString();
-                    변수2 = 변수들[띄어쓰기[3]]["value"].ToString();
-                    if (변수들[띄어쓰기[1]]["type"].ToString() == "string")
+                    변수1 = 폼1.변수값[띄어쓰기[1]].ToString();
+                    변수2 = 폼1.변수값[띄어쓰기[3]].ToString();
+                    if (폼1.변수형식[띄어쓰기[1]].ToString() == "string")
                     {
                         switch (띄어쓰기[2])
                         {
@@ -44,7 +43,7 @@ namespace koreanscript_csharp
                                 break;
                         }
                     }
-                    else if (변수들[띄어쓰기[1]]["type"].ToString() == "int")
+                    else if (폼1.변수형식[띄어쓰기[1]].ToString() == "int")
                     {
                         switch (띄어쓰기[2])
                         {
@@ -77,7 +76,7 @@ namespace koreanscript_csharp
                                 break;
                         }
                     }
-                    else if (변수들[띄어쓰기[1]]["type"].ToString() == "decimal")
+                    else if (폼1.변수형식[띄어쓰기[1]].ToString() == "decimal")
                     {
                         switch (띄어쓰기[2])
                         {
@@ -110,7 +109,7 @@ namespace koreanscript_csharp
                                 break;
                         }
                     }
-                    if (참거짓 == false) 계수기 += int.Parse(띄어쓰기[4]);
+                    if (참거짓 == false) 폼1.계수기 += int.Parse(띄어쓰기[4]);
                 }
             }
             catch { File.WriteAllText("err.log", $"{File.ReadAllText("err.log")}{계수기}번째 줄: 변수가 없거나 줄 수를 숫자가 아닌 것을 입력했습니다.\n"); }

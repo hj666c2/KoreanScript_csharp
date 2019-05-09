@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections;
 using System.ComponentModel;
 using System.Data;
 using System.IO;
@@ -13,6 +14,8 @@ namespace koreanscript_csharp
 {
     public partial class Form1 : Form
     {
+        public Hashtable 변수값 = new Hashtable();
+        public Hashtable 변수형식 = new Hashtable();
         public int 계수기 = 0;
         public Form1()
         {
@@ -23,16 +26,12 @@ namespace koreanscript_csharp
         {
             try
             {
-                string 변수읽기 = File.ReadAllText("변수.json");
-                JObject 검사 = JObject.Parse(변수읽기);
-                string 같은이름 = 검사[띄어쓰기[1]]["value"].ToString();
+                string 겁사 = 변수값[띄어쓰기[1]].ToString();
                 File.WriteAllText("err.log", $"{File.ReadAllText("err.log")}{계수기}번째 줄, 이미 같은 이름의 변수가 존재합니다.");
             }
             catch
             {
                 decimal outdecimal;
-                string read = File.ReadAllText("변수.json");
-                JObject json = JObject.Parse(read);
                 string type = "";
                 switch (띄어쓰기[0])
                 {
@@ -56,59 +55,8 @@ namespace koreanscript_csharp
                     {
                         try
                         {
-                            if (띄어쓰기.Length == 5)
-                            {
-                                int 첫번째 = int.Parse(띄어쓰기[2]);
-                                int 두번째 = int.Parse(띄어쓰기[4]);
-                                string 쓰기 = "";
-                                if (!(int.TryParse(띄어쓰기[2], out 첫번째) && int.TryParse(띄어쓰기[4], out 두번째)))
-                                {
-                                    try
-                                    {
-                                        string 변수들 = File.ReadAllText("변수.json");
-                                        JObject 읽기 = JObject.Parse(변수들);
-                                        if (읽기[띄어쓰기[2]]["type"].ToString() != "int")
-                                        {
-
-                                        }
-                                    }
-                                }
-                                switch(띄어쓰기[3])
-                                {
-                                    case "+":
-                                        쓰기 = (첫번째 + 두번째).ToString();
-                                        break;
-                                    case "-":
-                                        쓰기 = (첫번째 - 두번째).ToString();
-                                        break;
-                                    case "*":
-                                        쓰기 = (첫번째 * 두번째).ToString();
-                                        break;
-                                    case "/":
-                                        쓰기 = (첫번째 / 두번째).ToString();
-                                        break;
-                                    case "%":
-                                        쓰기 = (첫번째 % 두번째).ToString();
-                                        break;
-                                    default:
-                                        File.WriteAllText("err.log", $"{File.ReadAllText("err.log")}{계수기}번째 줄, 해당하는 연산자는 없습니다.");
-                                        break;
-                                }
-                                JObject 정수쓰기 = new JObject();
-                                정수쓰기.Add("value", 쓰기);
-                                정수쓰기.Add("type", type);
-                                json.Add(띄어쓰기[1], 정수쓰기);
-                                File.WriteAllText("변수.json", json.ToString());
-                            }
-                            else
-                            {
-                                int 테에스트 = int.Parse(띄어쓰기[2]);
-                                JObject 정수쓰기 = new JObject();
-                                정수쓰기.Add("value", 띄어쓰기[2]);
-                                정수쓰기.Add("type", type);
-                                json.Add(띄어쓰기[1], 정수쓰기);
-                                File.WriteAllText("변수.json", json.ToString());
-                            }
+                            변수값.Add(띄어쓰기[1],띄어쓰기[2]);
+                            변수형식.Add(띄어쓰기[1], 띄어쓰기[2]);
                         }
                         catch
                         {
@@ -130,11 +78,8 @@ namespace koreanscript_csharp
                             값부분[0] = 값부분[0].Substring(1);
                             값부분[값부분.Length - 1] = 값부분[값부분.Length - 1].Substring(0, 값부분[값부분.Length - 1].Length - 1);
                             쓸값 = string.Join(" ", 값부분);
-                            JObject writeint = new JObject();
-                            writeint.Add("value", 쓸값);
-                            writeint.Add("type", type);
-                            json.Add(띄어쓰기[1], writeint);
-                            File.WriteAllText("변수.json", json.ToString());
+                            변수값.Add(띄어쓰기[1],쓸값);
+                            변수형식.Add(띄어쓰기[1], "string");
                         }
                         else
                         {
@@ -150,11 +95,8 @@ namespace koreanscript_csharp
                 {
                     if (decimal.TryParse(띄어쓰기[2], out outdecimal))
                     {
-                        JObject writeint = new JObject();
-                        writeint.Add("value", 띄어쓰기[2]);
-                        writeint.Add("type", type);
-                        json.Add(띄어쓰기[1], writeint);
-                        File.WriteAllText("변수.json", json.ToString());
+                        변수값.Add(띄어쓰기[1], 띄어쓰기[2]);
+                        변수형식.Add(띄어쓰기[1], "decimal");
                     }
                     else
                     {
@@ -254,11 +196,9 @@ namespace koreanscript_csharp
                             }
                             else if (띄어쓰기[0] == "말하기")
                             {
-                                string 변수읽기 = File.ReadAllText("변수.json");
-                                JObject 변수들 = JObject.Parse(변수읽기);
                                 try
                                 {
-                                    string 변수 = 변수들[띄어쓰기[1]]["value"].ToString();
+                                    string 변수 = 변수값[띄어쓰기[1]].ToString();
                                     if (변수.Contains(@"\줄"))
                                     {
                                         string[] 줄나누기 = 변수.Split(new string[] { @"\줄" }, StringSplitOptions.None);
