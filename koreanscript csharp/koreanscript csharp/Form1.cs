@@ -164,7 +164,7 @@ namespace koreanscript_csharp
                                 조건문 조건문 = new 조건문();
                                 await 조건문.만약에(띄어쓰기, 계수기와1);
                             }
-                            else if (띄어쓰기[0] == "이동") { 계수기 = int.Parse(띄어쓰기[1]) - 1; await Task.Delay(100); }
+                            else if (띄어쓰기[0] == "이동") { 계수기 = int.Parse(띄어쓰기[1]) - 1; await Task.Delay(10); }
                             else
                             {
                                 File.WriteAllText("err.log", $"{File.ReadAllText("err.log")}{계수기와1}번째 줄, 해당하는 명령어가 존재하지 않습니다.\n");
