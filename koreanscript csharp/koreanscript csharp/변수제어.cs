@@ -9,6 +9,7 @@ namespace koreanscript_csharp
 {
     class 변수제어 : Form1
     {
+        //읽으실 때 주의: 이 코드는 (개발자 생각에)스파게티입니다. 그래서 옆에 메모장 등을 켜 놓으시고 번역하시면서 읽는것을 추천 (주석도 없으니...)
         public Hashtable 값 = new Hashtable();
         public Hashtable 형식 = new Hashtable();
         public async Task 변수쓰기(string 한줄, string[] 띄어쓰기, int 계수기)
@@ -212,16 +213,142 @@ namespace koreanscript_csharp
                     }
                     else if (type == "decimal")
                     {
-                        if (decimal.TryParse(띄어쓰기[2], out outdecimal))
+                    { 
+                        decimal 실수값 = 0;
+                        if (띄어쓰기.Length == 3)
                         {
-                            값.Add(띄어쓰기[1], 띄어쓰기[2]);
-                            형식.Add(띄어쓰기[1], "decimal");
+                            if (decimal.TryParse(띄어쓰기[2], out outdecimal))
+                            {
+                                실수값 += decimal.Parse(띄어쓰기[2]);
+                                형식.Add(띄어쓰기[1], "int");
+                                값.Add(띄어쓰기[1], 실수값.ToString());
+                            }
+                            else
+                            {
+                                try
+                                {
+                                    if (형식[띄어쓰기[2]].ToString() == "string")
+                                    { File.WriteAllText("err.log", File.ReadAllText("err.log") + 계수기 + "번째 줄: 실수변수에는 문자를 넣을 수 없습니다.\n"); }
+                                    else
+                                    {
+                                        실수값 += decimal.Parse(값[띄어쓰기[2]].ToString());
+                                    }
+                                    형식.Add(띄어쓰기[1], "int");
+                                    값.Add(띄어쓰기[1], 실수값.ToString());
+                                }
+                                catch
+                                {
+                                    File.WriteAllText("err.log", File.ReadAllText("err.log") + 계수기 + "번째 줄: 해당하는 변수가 존재하지 않습니다.\n");
+                                }
+                            }
                         }
-                        else
+                        else if (띄어쓰기.Length == 5)
                         {
-                            File.WriteAllText("err.log", File.ReadAllText("err.log") + 계수기 + "번째 줄: 실수변수 안에 문자를 넣을 수 없습니다.\n");
+                            if (decimal.TryParse(띄어쓰기[2], out outdecimal))
+                            {
+                                if (띄어쓰기[3] == "+" || 띄어쓰기[3] == "-" || 띄어쓰기[3] == "*" || 띄어쓰기[3] == "/" || 띄어쓰기[3] == "%")
+                                { 실수값 += decimal.Parse(띄어쓰기[2]); }
+                                else File.WriteAllText("err.log", File.ReadAllText("err.log") + 계수기 + "번째 줄: 해당하는 연산자는 존재하지 않습니다.\n");
+                            }
+                            else
+                            {
+                                try
+                                {
+                                    if (형식[띄어쓰기[2]].ToString() == "string")
+                                        { File.WriteAllText("err.log", File.ReadAllText("err.log") + 계수기 + "번째 줄: 실수변수에는 혹은 문자를 넣을 수 없습니다.\n"); }
+                                    else
+                                    {
+                                        if (띄어쓰기[3] == "+" || 띄어쓰기[3] == "-" || 띄어쓰기[3] == "*" || 띄어쓰기[3] == "/" || 띄어쓰기[3] == "%")
+                                        { 실수값 += decimal.Parse(값[띄어쓰기[2]].ToString()); }
+                                        else File.WriteAllText("err.log", File.ReadAllText("err.log") + 계수기 + "번째 줄: 해당하는 연산자는 존재하지 않습니다.\n");
+                                    }
+                                }
+                                catch
+                                {
+                                    File.WriteAllText("err.log", File.ReadAllText("err.log") + 계수기 + "번째 줄: 해당하는 변수가 존재하지 않습니다.\n");
+                                }
+                            }
+                            if (decimal.TryParse(띄어쓰기[4], out outdecimal))
+                            {
+                                switch (띄어쓰기[3])
+                                {
+                                    case "+":
+                                        실수값 += decimal.Parse(띄어쓰기[4]);
+                                        형식.Add(띄어쓰기[1], "decimal");
+                                        값.Add(띄어쓰기[1], 실수값.ToString());
+                                        break;
+                                    case "-":
+                                        실수값 -= decimal.Parse(띄어쓰기[4]);
+                                        형식.Add(띄어쓰기[1], "decimal");
+                                        값.Add(띄어쓰기[1], 실수값.ToString());
+                                        break;
+                                    case "*":
+                                        실수값 *= decimal.Parse(띄어쓰기[4]);
+                                        형식.Add(띄어쓰기[1], "decimal");
+                                        값.Add(띄어쓰기[1], 실수값.ToString());
+                                        break;
+                                    case "/":
+                                        실수값 /= decimal.Parse(띄어쓰기[4]);
+                                        형식.Add(띄어쓰기[1], "decimal");
+                                        값.Add(띄어쓰기[1], 실수값.ToString());
+                                        break;
+                                    case "%":
+                                        실수값 %= decimal.Parse(띄어쓰기[4]);
+                                        형식.Add(띄어쓰기[1], "decimal");
+                                        값.Add(띄어쓰기[1], 실수값.ToString());
+                                        break;
+                                    default:
+                                        File.WriteAllText("err.log", File.ReadAllText("err.log") + 계수기 + "번째 줄: 해당하는 연산자는 존재하지 않습니다.\n");
+                                        break;
+                                }
+                            }
+                            else
+                            {
+                                try
+                                {
+                                    if (형식[띄어쓰기[4]].ToString() == "decimal")
+                                    {
+                                        switch (띄어쓰기[3])
+                                        {
+                                            case "+":
+                                                실수값 += decimal.Parse(값[띄어쓰기[4]].ToString());
+                                                형식.Add(띄어쓰기[1], "decimal");
+                                                값.Add(띄어쓰기[1], 실수값.ToString());
+                                                break;
+                                            case "-":
+                                                실수값 -= decimal.Parse(값[띄어쓰기[4]].ToString());
+                                                형식.Add(띄어쓰기[1], "decimal");
+                                                값.Add(띄어쓰기[1], 실수값.ToString());
+                                                break;
+                                            case "*":
+                                                실수값 *= decimal.Parse(값[띄어쓰기[4]].ToString());
+                                                형식.Add(띄어쓰기[1], "decimal");
+                                                값.Add(띄어쓰기[1], 실수값.ToString());
+                                                break;
+                                            case "/":
+                                                실수값 /= decimal.Parse(값[띄어쓰기[4]].ToString());
+                                                형식.Add(띄어쓰기[1], "decimal");
+                                                값.Add(띄어쓰기[1], 실수값.ToString());
+                                                break;
+                                            case "%":
+                                                실수값 %= decimal.Parse(값[띄어쓰기[4]].ToString());
+                                                형식.Add(띄어쓰기[1], "decimal");
+                                                값.Add(띄어쓰기[1], 실수값.ToString());
+                                                break;
+                                            default:
+                                                File.WriteAllText("err.log", File.ReadAllText("err.log") + 계수기 + "번째 줄: 해당하는 연산자는 존재하지 않습니다.\n");
+                                                break;
+                                        }
+                                    }
+                                }
+                                catch
+                                {
+                                    File.WriteAllText("err.log", File.ReadAllText("err.log") + 계수기 + "번째 줄: 해당하는 변수가 존재하지 않습니다.\n");
+                                }
+                            }
                         }
                     }
+                }
                 }
             }
         }
