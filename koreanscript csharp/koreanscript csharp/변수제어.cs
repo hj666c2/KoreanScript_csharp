@@ -86,20 +86,25 @@ namespace koreanscript_csharp
                             }
                             else
                             {
-                                try
+                                if (형식[띄어쓰기[2]].ToString() != "int")
+                                { File.WriteAllText("err.log", File.ReadAllText("err.log") + 계수기 + "번째 줄: 정수변수에는 실수 혹은 문자를 넣을 수 없습니다.\n"); }
+                                else
                                 {
-                                    if (형식[띄어쓰기[2]].ToString() != "int")
-                                    { File.WriteAllText("err.log", File.ReadAllText("err.log") + 계수기 + "번째 줄: 정수변수에는 실수 혹은 문자를 넣을 수 없습니다.\n"); }
-                                    else
+                                    try
                                     {
-                                        if (띄어쓰기[3] == "+" || 띄어쓰기[3] == "-" || 띄어쓰기[3] == "*" || 띄어쓰기[3] == "/" || 띄어쓰기[3] == "%")
-                                        { 정수값 += int.Parse(값[띄어쓰기[2]].ToString()); }
-                                        else File.WriteAllText("err.log", File.ReadAllText("err.log") + 계수기 + "번째 줄: 해당하는 연산자는 존재하지 않습니다.\n");
+                                        if (형식[띄어쓰기[2]].ToString() != "int")
+                                        { File.WriteAllText("err.log", File.ReadAllText("err.log") + 계수기 + "번째 줄: 정수변수에는 실수 혹은 문자를 넣을 수 없습니다.\n"); }
+                                        else
+                                        {
+                                            if (띄어쓰기[3] == "+" || 띄어쓰기[3] == "-" || 띄어쓰기[3] == "*" || 띄어쓰기[3] == "/" || 띄어쓰기[3] == "%")
+                                            { 정수값 += int.Parse(값[띄어쓰기[2]].ToString()); }
+                                            else File.WriteAllText("err.log", File.ReadAllText("err.log") + 계수기 + "번째 줄: 해당하는 연산자는 존재하지 않습니다.\n");
+                                        }
                                     }
-                                }
-                                catch
-                                {
-                                    File.WriteAllText("err.log", File.ReadAllText("err.log") + 계수기 + "번째 줄: 해당하는 변수가 존재하지 않습니다.\n");
+                                    catch
+                                    {
+                                        File.WriteAllText("err.log", File.ReadAllText("err.log") + 계수기 + "번째 줄: 해당하는 변수가 존재하지 않습니다.\n");
+                                    }
                                 }
                             }
                             if (int.TryParse(띄어쓰기[4], out outint))
@@ -145,27 +150,27 @@ namespace koreanscript_csharp
                                         switch (띄어쓰기[3])
                                         {
                                             case "+":
-                                                정수값 += int.Parse(값[띄어쓰기[4]].ToString());
+                                                정수값 += int.Parse(값[띄어쓰기[2]].ToString());
                                                 형식.Add(띄어쓰기[1], "int");
                                                 값.Add(띄어쓰기[1], 정수값.ToString());
                                                 break;
                                             case "-":
-                                                정수값 -= int.Parse(값[띄어쓰기[4]].ToString());
+                                                정수값 -= int.Parse(값[띄어쓰기[2]].ToString());
                                                 형식.Add(띄어쓰기[1], "int");
                                                 값.Add(띄어쓰기[1], 정수값.ToString());
                                                 break;
                                             case "*":
-                                                정수값 *= int.Parse(값[띄어쓰기[4]].ToString());
+                                                정수값 *= int.Parse(값[띄어쓰기[2]].ToString());
                                                 형식.Add(띄어쓰기[1], "int");
                                                 값.Add(띄어쓰기[1], 정수값.ToString());
                                                 break;
                                             case "/":
-                                                정수값 /= int.Parse(값[띄어쓰기[4]].ToString());
+                                                정수값 /= int.Parse(값[띄어쓰기[2]].ToString());
                                                 형식.Add(띄어쓰기[1], "int");
                                                 값.Add(띄어쓰기[1], 정수값.ToString());
                                                 break;
                                             case "%":
-                                                정수값 %= int.Parse(값[띄어쓰기[4]].ToString());
+                                                정수값 %= int.Parse(값[띄어쓰기[2]].ToString());
                                                 형식.Add(띄어쓰기[1], "int");
                                                 값.Add(띄어쓰기[1], 정수값.ToString());
                                                 break;
@@ -183,8 +188,17 @@ namespace koreanscript_csharp
                         }
                     }
                     else if (type == "string")
-                    {
-                        if (값부분[0].IndexOf("\"") != 0 || (값부분[값부분.Length - 1].LastIndexOf("\"") != 값부분[값부분.Length - 1].Length - 1))
+                    { 
+                        if (값부분[0].IndexOf("\"") == 0 && (값부분[값부분.Length - 1].LastIndexOf("\"") == 값부분[값부분.Length - 1].Length - 1))
+                        {
+                            string 쓸값 = null;
+                            값부분[0] = 값부분[0].Substring(1);
+                            값부분[값부분.Length - 1] = 값부분[값부분.Length - 1].Substring(0, 값부분[값부분.Length - 1].Length - 1);
+                            쓸값 = string.Join(" ", 값부분);
+                            형식.Add(띄어쓰기[1], "string");
+                            값.Add(띄어쓰기[1], 쓸값);
+                        }
+                        else
                         {
                             string 쓸문자 = "";
                             if (띄어쓰기[3] == "+")
@@ -200,15 +214,6 @@ namespace koreanscript_csharp
                                     File.WriteAllText("err.log", File.ReadAllText("err.log") + 계수기 + "번째 줄: 해당하는 변수가 없습니다.\n");
                                 }
                             }
-                        }
-                        else
-                        {
-                            string 쓸값 = null;
-                            값부분[0] = 값부분[0].Substring(1);
-                            값부분[값부분.Length - 1] = 값부분[값부분.Length - 1].Substring(0, 값부분[값부분.Length - 1].Length - 1);
-                            쓸값 = string.Join(" ", 값부분);
-                            형식.Add(띄어쓰기[1], "string");
-                            값.Add(띄어쓰기[1], 쓸값);
                         }
                     }
                     else if (type == "decimal")
@@ -364,6 +369,8 @@ namespace koreanscript_csharp
 
         public async Task 값지정(string[] 띄어쓰기, int 계수기)
         {
+            값.Clear();
+            형식.Clear();
             값 = 변수값;
             형식 = 변수형식;
             try
