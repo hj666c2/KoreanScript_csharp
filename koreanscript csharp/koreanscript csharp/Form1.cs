@@ -153,22 +153,30 @@ namespace koreanscript_csharp
                                 }
                                 catch
                                 {
+                                    string 변수 = 변수값[띄어쓰기[1]].ToString();
+                                    if (변수.Contains(@"\줄"))
+                                    {
+                                        string[] 줄나누기 = 변수.Split(new string[] { @"\줄" }, StringSplitOptions.None);
+                                        변수 = string.Join("\n", 줄나누기);
+                                    }
+                                    출력 += 변수;
                                     File.WriteAllText("err.log", $"{File.ReadAllText("err.log")}{계수기와1}번째 줄, 해당하는 변수가 존재하지 않습니다.\n");
                                 }
                             }
                             else if (띄어쓰기[0] == "값지정")
                             {
                                 변수제어 변수 = new 변수제어();
-                                await 변수.값지정(띄어쓰기, 계수기와1);
+                                await 변수.값지정(한줄[계수기], 띄어쓰기, 계수기와1, 변수값, 변수형식);
                                 변수값 = 변수.값;
                                 변수형식 = 변수.형식;
                             }
                             else if (띄어쓰기[0] == "만약")
                             {
                                 조건문 조건문 = new 조건문();
-                                await 조건문.만약에(띄어쓰기, 계수기와1);
+                                await 조건문.만약에(띄어쓰기, 계수기와1, 변수형식, 변수값);
+                                계수기 = 조건문.바꾸는계수기;
                             }
-                            else if (띄어쓰기[0] == "이동") { 계수기 = int.Parse(띄어쓰기[1]) - 1; await Task.Delay(10); }
+                            else if (띄어쓰기[0] == "이동") { await Task.Delay(10); 계수기 = int.Parse(띄어쓰기[1]) - 1; }
                             else
                             {
                                 File.WriteAllText("err.log", $"{File.ReadAllText("err.log")}{계수기와1}번째 줄, 해당하는 명령어가 존재하지 않습니다.\n");
@@ -177,8 +185,7 @@ namespace koreanscript_csharp
                     }
                     catch
                     {
-                        변수제어 변수제어 = new 변수제어();
-                        File.WriteAllText("오류.txt", $"{변수제어.형식[띄어쓰기[2]].ToString()} {변수제어.값[띄어쓰기[2]].ToString()}"); break; }
+                     break; }
                      }
                 if (File.ReadAllText("err.log") != "")
                 {
@@ -194,6 +201,7 @@ namespace koreanscript_csharp
         private void 종료ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             계수기 = 2147483647;
+            richTextBox2.Text = "";
         }
     }
 }

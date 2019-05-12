@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.Collections;
 using System.Linq;
 using System.Text;
 using System.IO;
@@ -9,8 +9,10 @@ namespace koreanscript_csharp
 {
     class 조건문 : Form1
     {
-        public async Task 만약에(string[] 띄어쓰기, int 계수기)
+        public int 바꾸는계수기 = 0;
+        public async Task 만약에(string[] 띄어쓰기, int 계수기, Hashtable 변수형식, Hashtable 변수값)
         {
+            바꾸는계수기 = 계수기;
             bool 참거짓 = false;
             try
             {
@@ -107,8 +109,7 @@ namespace koreanscript_csharp
                                 break;
                         }
                     }
-                    Form1 폼1 = new Form1();
-                    if (참거짓 == false) 폼1.계수기 += int.Parse(띄어쓰기[4]);
+                    if (참거짓 == false) 바꾸는계수기 += int.Parse(띄어쓰기[4]);
                 }
             }
             catch { File.WriteAllText("err.log", $"{File.ReadAllText("err.log")}{계수기}번째 줄: 변수가 없거나 줄 수를 숫자가 아닌 것을 입력했습니다.\n"); }
