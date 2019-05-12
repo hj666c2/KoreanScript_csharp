@@ -115,7 +115,7 @@ namespace koreanscript_csharp
                 string[] 한줄 = 입력.Split('\n');
                 string[] 띄어쓰기 = new string[] { };
                 int 계수기와1 = 0;
-                for (계수기 = 0; 계수기 < 한줄.Length; ++계수기)
+                for (계수기 = 0; 계수기 <= 한줄.Length; 계수기++)
                 {
                     try
                     {
@@ -153,13 +153,6 @@ namespace koreanscript_csharp
                                 }
                                 catch
                                 {
-                                    string 변수 = 변수값[띄어쓰기[1]].ToString();
-                                    if (변수.Contains(@"\줄"))
-                                    {
-                                        string[] 줄나누기 = 변수.Split(new string[] { @"\줄" }, StringSplitOptions.None);
-                                        변수 = string.Join("\n", 줄나누기);
-                                    }
-                                    출력 += 변수;
                                     File.WriteAllText("err.log", $"{File.ReadAllText("err.log")}{계수기와1}번째 줄, 해당하는 변수가 존재하지 않습니다.\n");
                                 }
                             }
@@ -176,7 +169,7 @@ namespace koreanscript_csharp
                                 await 조건문.만약에(띄어쓰기, 계수기와1, 변수형식, 변수값);
                                 계수기 = 조건문.바꾸는계수기;
                             }
-                            else if (띄어쓰기[0] == "이동") { await Task.Delay(10); 계수기 = int.Parse(띄어쓰기[1]) - 1; }
+                            else if (띄어쓰기[0] == "이동") { await Task.Delay(1); 계수기 = int.Parse(띄어쓰기[1]) - 2; }
                             else
                             {
                                 File.WriteAllText("err.log", $"{File.ReadAllText("err.log")}{계수기와1}번째 줄, 해당하는 명령어가 존재하지 않습니다.\n");
@@ -185,8 +178,10 @@ namespace koreanscript_csharp
                     }
                     catch
                     {
-                     break; }
-                     }
+                      break;
+                    }
+                    richTextBox2.Text = $"{richTextBox2.Text}{계수기와1}번째줄 연산 완료 \n";
+                }
                 if (File.ReadAllText("err.log") != "")
                 {
                     richTextBox2.Text = File.ReadAllText("err.log");
@@ -202,6 +197,11 @@ namespace koreanscript_csharp
         {
             계수기 = 2147483647;
             richTextBox2.Text = "";
+        }
+
+        private void 프로그램재시작ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Application.Restart();
         }
     }
 }

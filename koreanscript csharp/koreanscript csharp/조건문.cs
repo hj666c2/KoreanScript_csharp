@@ -60,7 +60,7 @@ namespace koreanscript_csharp
                                 else 참거짓 = false;
                                 break;
                             case "<=":
-                                if (int.Parse(변수1) >= int.Parse(변수2)) 참거짓 = true;
+                                if (int.Parse(변수1) <= int.Parse(변수2)) 참거짓 = true;
                                 else 참거짓 = false;
                                 break;
                             case "<":
@@ -93,7 +93,7 @@ namespace koreanscript_csharp
                                 else 참거짓 = false;
                                 break;
                             case "<=":
-                                if (decimal.Parse(변수1) >= decimal.Parse(변수2)) 참거짓 = true;
+                                if (decimal.Parse(변수1) <= decimal.Parse(변수2)) 참거짓 = true;
                                 else 참거짓 = false;
                                 break;
                             case "<":
@@ -109,7 +109,8 @@ namespace koreanscript_csharp
                                 break;
                         }
                     }
-                    if (참거짓 == false) 바꾸는계수기 += int.Parse(띄어쓰기[4]);
+                    if (참거짓 == false) 계수기 += (int.Parse(띄어쓰기[4]) - 2);
+                    바꾸는계수기 = 계수기;
                 }
             }
             catch { File.WriteAllText("err.log", $"{File.ReadAllText("err.log")}{계수기}번째 줄: 변수가 없거나 줄 수를 숫자가 아닌 것을 입력했습니다.\n"); }
