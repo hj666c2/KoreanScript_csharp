@@ -135,7 +135,7 @@ namespace koreanscript_csharp
                             else if (띄어쓰기[0] == "정수변수" || 띄어쓰기[0] == "문자변수" || 띄어쓰기[0] == "실수변수")
                             {
                                 변수제어 변수제어 = new 변수제어();
-                                await 변수제어.변수쓰기(한줄[계수기], 띄어쓰기, 계수기와1);
+                                await 변수제어.변수쓰기(한줄[계수기], 띄어쓰기, 계수기와1, 변수값, 변수형식);
                                 변수값 = 변수제어.값;
                                 변수형식 = 변수제어.형식;
                             }
@@ -175,8 +175,11 @@ namespace koreanscript_csharp
                             }
                         }
                     }
-                    catch { break; }
-                }
+                    catch
+                    {
+                        변수제어 변수제어 = new 변수제어();
+                        File.WriteAllText("오류.txt", $"{변수제어.형식[띄어쓰기[2]].ToString()} {변수제어.값[띄어쓰기[2]].ToString()}"); break; }
+                     }
                 if (File.ReadAllText("err.log") != "")
                 {
                     richTextBox2.Text = File.ReadAllText("err.log");

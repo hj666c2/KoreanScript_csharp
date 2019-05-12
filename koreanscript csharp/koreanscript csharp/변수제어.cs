@@ -12,10 +12,8 @@ namespace koreanscript_csharp
         //읽으실 때 주의: 이 코드는 (개발자 생각에)스파게티입니다. 그래서 옆에 메모장 등을 켜 놓으시고 번역하시면서 읽는것을 추천 (주석도 없으니...)
         public Hashtable 값 = new Hashtable();
         public Hashtable 형식 = new Hashtable();
-        public async Task 변수쓰기(string 한줄, string[] 띄어쓰기, int 계수기)
+        public async Task 변수쓰기(string 한줄, string[] 띄어쓰기, int 계수기, Hashtable 값, Hashtable 형식)
         {
-            값 = 변수값;
-            형식 = 변수형식;
             try
             {
                 string 겁사 = 형식[띄어쓰기[1]].ToString();
@@ -53,9 +51,9 @@ namespace koreanscript_csharp
                         {
                             if (int.TryParse(띄어쓰기[2], out outint))
                             {
-                                정수값 += int.Parse(띄어쓰기[2]);
+                                정수값 += outint;
                                 형식.Add(띄어쓰기[1], "int");
-                                값.Add(띄어쓰기[1], 정수값.ToString());
+                                값.Add(띄어쓰기[1], 정수값);
                             }
                             else
                             {
@@ -65,10 +63,10 @@ namespace koreanscript_csharp
                                     { File.WriteAllText("err.log", File.ReadAllText("err.log") + 계수기 + "번째 줄: 정수변수에는 실수 혹은 문자를 넣을 수 없습니다.\n"); }
                                     else
                                     {
-                                        정수값 += int.Parse(값[띄어쓰기[2]].ToString());
+                                        정수값 += (int)값[띄어쓰기[2]];
                                     }
                                     형식.Add(띄어쓰기[1], "int");
-                                    값.Add(띄어쓰기[1], 정수값.ToString());
+                                    값.Add(띄어쓰기[1], 정수값);
                                 }
                                 catch
                                 {
@@ -81,7 +79,7 @@ namespace koreanscript_csharp
                             if (int.TryParse(띄어쓰기[2], out outint))
                             {
                                 if (띄어쓰기[3] == "+" || 띄어쓰기[3] == "-" || 띄어쓰기[3] == "*" || 띄어쓰기[3] == "/" || 띄어쓰기[3] == "%")
-                                { 정수값 += int.Parse(띄어쓰기[2]); }
+                                { 정수값 += outint; }
                                 else File.WriteAllText("err.log", File.ReadAllText("err.log") + 계수기 + "번째 줄: 해당하는 연산자는 존재하지 않습니다.\n");
                             }
                             else
@@ -97,7 +95,7 @@ namespace koreanscript_csharp
                                         else
                                         {
                                             if (띄어쓰기[3] == "+" || 띄어쓰기[3] == "-" || 띄어쓰기[3] == "*" || 띄어쓰기[3] == "/" || 띄어쓰기[3] == "%")
-                                            { 정수값 += int.Parse(값[띄어쓰기[2]].ToString()); }
+                                            { 정수값 += (int)값[띄어쓰기[2]]; }
                                             else File.WriteAllText("err.log", File.ReadAllText("err.log") + 계수기 + "번째 줄: 해당하는 연산자는 존재하지 않습니다.\n");
                                         }
                                     }
@@ -112,29 +110,36 @@ namespace koreanscript_csharp
                                 switch (띄어쓰기[3])
                                 {
                                     case "+":
-                                        정수값 += int.Parse(띄어쓰기[4]);
+                                        정수값 = 정수값 + outint;
                                         형식.Add(띄어쓰기[1], "int");
-                                        값.Add(띄어쓰기[1], 정수값.ToString());
+                                        값.Add(띄어쓰기[1], 정수값);
                                         break;
                                     case "-":
-                                        정수값 -= int.Parse(띄어쓰기[4]);
+                                        정수값 = 정수값 - outint;
                                         형식.Add(띄어쓰기[1], "int");
-                                        값.Add(띄어쓰기[1], 정수값.ToString());
+                                        값.Add(띄어쓰기[1], 정수값);
                                         break;
                                     case "*":
-                                        정수값 *= int.Parse(띄어쓰기[4]);
+                                        정수값 = 정수값 * outint;
                                         형식.Add(띄어쓰기[1], "int");
-                                        값.Add(띄어쓰기[1], 정수값.ToString());
+                                        값.Add(띄어쓰기[1], 정수값);
                                         break;
                                     case "/":
-                                        정수값 /= int.Parse(띄어쓰기[4]);
-                                        형식.Add(띄어쓰기[1], "int");
-                                        값.Add(띄어쓰기[1], 정수값.ToString());
+                                        try
+                                        {
+                                            정수값 = 정수값 / outint;
+                                            형식.Add(띄어쓰기[1], "int");
+                                            값.Add(띄어쓰기[1], 정수값);
+                                        }
+                                        catch
+                                        {
+                                            File.WriteAllText("err.log", File.ReadAllText("err.log") + 계수기 + "번째 줄: 0으로 나눌 수 없습니다.\n");
+                                        }
                                         break;
                                     case "%":
-                                        정수값 %= int.Parse(띄어쓰기[4]);
+                                        정수값 = 정수값 % outint;
                                         형식.Add(띄어쓰기[1], "int");
-                                        값.Add(띄어쓰기[1], 정수값.ToString());
+                                        값.Add(띄어쓰기[1], 정수값);
                                         break;
                                     default:
                                         File.WriteAllText("err.log", File.ReadAllText("err.log") + 계수기 + "번째 줄: 해당하는 연산자는 존재하지 않습니다.\n");
@@ -150,29 +155,43 @@ namespace koreanscript_csharp
                                         switch (띄어쓰기[3])
                                         {
                                             case "+":
-                                                정수값 += int.Parse(값[띄어쓰기[2]].ToString());
+                                                정수값 += (int)값[띄어쓰기[4]];
                                                 형식.Add(띄어쓰기[1], "int");
-                                                값.Add(띄어쓰기[1], 정수값.ToString());
+                                                값.Add(띄어쓰기[1], 정수값);
                                                 break;
                                             case "-":
-                                                정수값 -= int.Parse(값[띄어쓰기[2]].ToString());
+                                                정수값 -= (int)값[띄어쓰기[4]];
                                                 형식.Add(띄어쓰기[1], "int");
-                                                값.Add(띄어쓰기[1], 정수값.ToString());
+                                                값.Add(띄어쓰기[1], 정수값);
                                                 break;
                                             case "*":
-                                                정수값 *= int.Parse(값[띄어쓰기[2]].ToString());
+                                                정수값 *= (int)값[띄어쓰기[4]];
                                                 형식.Add(띄어쓰기[1], "int");
-                                                값.Add(띄어쓰기[1], 정수값.ToString());
+                                                값.Add(띄어쓰기[1], 정수값);
                                                 break;
                                             case "/":
-                                                정수값 /= int.Parse(값[띄어쓰기[2]].ToString());
-                                                형식.Add(띄어쓰기[1], "int");
-                                                값.Add(띄어쓰기[1], 정수값.ToString());
+                                                try
+                                                {
+                                                    정수값 /= (int)값[띄어쓰기[4]];
+                                                    형식.Add(띄어쓰기[1], "int");
+                                                    값.Add(띄어쓰기[1], 정수값);
+                                                }
+                                                catch
+                                                {
+                                                    File.WriteAllText("err.log", File.ReadAllText("err.log") + 계수기 + "번째 줄: 0으로 나눌 수 없습니다.\n");
+                                                }
                                                 break;
                                             case "%":
-                                                정수값 %= int.Parse(값[띄어쓰기[2]].ToString());
-                                                형식.Add(띄어쓰기[1], "int");
-                                                값.Add(띄어쓰기[1], 정수값.ToString());
+                                                try
+                                                {
+                                                    정수값 %= (int)값[띄어쓰기[4]];
+                                                    형식.Add(띄어쓰기[1], "int");
+                                                    값.Add(띄어쓰기[1], 정수값);
+                                                }
+                                                catch
+                                                {
+                                                    File.WriteAllText("err.log", File.ReadAllText("err.log") + 계수기 + "번째 줄: 0으로 나눌 수 없습니다.\n");
+                                                }
                                                 break;
                                             default:
                                                 File.WriteAllText("err.log", File.ReadAllText("err.log") + 계수기 + "번째 줄: 해당하는 연산자는 존재하지 않습니다.\n");
@@ -225,8 +244,8 @@ namespace koreanscript_csharp
                             if (decimal.TryParse(띄어쓰기[2], out outdecimal))
                             {
                                 실수값 += decimal.Parse(띄어쓰기[2]);
-                                형식.Add(띄어쓰기[1], "int");
-                                값.Add(띄어쓰기[1], 실수값.ToString());
+                                형식.Add(띄어쓰기[1], "decimal");
+                                값.Add(띄어쓰기[1], 실수값);
                             }
                             else
                             {
@@ -236,7 +255,7 @@ namespace koreanscript_csharp
                                     { File.WriteAllText("err.log", File.ReadAllText("err.log") + 계수기 + "번째 줄: 실수변수에는 문자를 넣을 수 없습니다.\n"); }
                                     else
                                     {
-                                        실수값 += decimal.Parse(값[띄어쓰기[2]].ToString());
+                                        실수값 += (decimal)값[띄어쓰기[2]];
                                     }
                                     형식.Add(띄어쓰기[1], "int");
                                     값.Add(띄어쓰기[1], 실수값.ToString());
@@ -264,7 +283,7 @@ namespace koreanscript_csharp
                                     else
                                     {
                                         if (띄어쓰기[3] == "+" || 띄어쓰기[3] == "-" || 띄어쓰기[3] == "*" || 띄어쓰기[3] == "/" || 띄어쓰기[3] == "%")
-                                        { 실수값 += decimal.Parse(값[띄어쓰기[2]].ToString()); }
+                                        { 실수값 += (decimal)값[띄어쓰기[2]]; }
                                         else File.WriteAllText("err.log", File.ReadAllText("err.log") + 계수기 + "번째 줄: 해당하는 연산자는 존재하지 않습니다.\n");
                                     }
                                 }
@@ -278,29 +297,29 @@ namespace koreanscript_csharp
                                 switch (띄어쓰기[3])
                                 {
                                     case "+":
-                                        실수값 += decimal.Parse(띄어쓰기[4]);
+                                        실수값 += outdecimal;
                                         형식.Add(띄어쓰기[1], "decimal");
-                                        값.Add(띄어쓰기[1], 실수값.ToString());
+                                        값.Add(띄어쓰기[1], 실수값);
                                         break;
                                     case "-":
-                                        실수값 -= decimal.Parse(띄어쓰기[4]);
+                                        실수값 -= outdecimal;
                                         형식.Add(띄어쓰기[1], "decimal");
-                                        값.Add(띄어쓰기[1], 실수값.ToString());
+                                        값.Add(띄어쓰기[1], 실수값);
                                         break;
                                     case "*":
-                                        실수값 *= decimal.Parse(띄어쓰기[4]);
+                                        실수값 *= outdecimal;
                                         형식.Add(띄어쓰기[1], "decimal");
-                                        값.Add(띄어쓰기[1], 실수값.ToString());
+                                        값.Add(띄어쓰기[1], 실수값);
                                         break;
                                     case "/":
-                                        실수값 /= decimal.Parse(띄어쓰기[4]);
+                                        실수값 /= outdecimal;
                                         형식.Add(띄어쓰기[1], "decimal");
-                                        값.Add(띄어쓰기[1], 실수값.ToString());
+                                        값.Add(띄어쓰기[1], 실수값);
                                         break;
                                     case "%":
-                                        실수값 %= decimal.Parse(띄어쓰기[4]);
+                                        실수값 %= outdecimal;
                                         형식.Add(띄어쓰기[1], "decimal");
-                                        값.Add(띄어쓰기[1], 실수값.ToString());
+                                        값.Add(띄어쓰기[1], 실수값);
                                         break;
                                     default:
                                         File.WriteAllText("err.log", File.ReadAllText("err.log") + 계수기 + "번째 줄: 해당하는 연산자는 존재하지 않습니다.\n");
@@ -316,30 +335,44 @@ namespace koreanscript_csharp
                                         switch (띄어쓰기[3])
                                         {
                                             case "+":
-                                                실수값 += decimal.Parse(값[띄어쓰기[4]].ToString());
+                                                실수값 += (decimal)값[띄어쓰기[4]];
                                                 형식.Add(띄어쓰기[1], "decimal");
-                                                값.Add(띄어쓰기[1], 실수값.ToString());
+                                                값.Add(띄어쓰기[1], 실수값);
                                                 break;
                                             case "-":
-                                                실수값 -= decimal.Parse(값[띄어쓰기[4]].ToString());
+                                                실수값 -= (decimal)값[띄어쓰기[4]];
                                                 형식.Add(띄어쓰기[1], "decimal");
-                                                값.Add(띄어쓰기[1], 실수값.ToString());
+                                                값.Add(띄어쓰기[1], 실수값);
                                                 break;
                                             case "*":
-                                                실수값 *= decimal.Parse(값[띄어쓰기[4]].ToString());
+                                                실수값 *= (decimal)값[띄어쓰기[4]];
                                                 형식.Add(띄어쓰기[1], "decimal");
-                                                값.Add(띄어쓰기[1], 실수값.ToString());
+                                                값.Add(띄어쓰기[1], 실수값);
                                                 break;
                                             case "/":
-                                                실수값 /= decimal.Parse(값[띄어쓰기[4]].ToString());
-                                                형식.Add(띄어쓰기[1], "decimal");
-                                                값.Add(띄어쓰기[1], 실수값.ToString());
-                                                break;
+                                                try
+                                                {
+                                                    실수값 /= (decimal)값[띄어쓰기[4]];
+                                                    형식.Add(띄어쓰기[1], "decimal");
+                                                    값.Add(띄어쓰기[1], 실수값);
+                                                }
+                                                catch
+                                                {
+                                                    File.WriteAllText("err.log", File.ReadAllText("err.log") + 계수기 + "번째 줄: 0으로 나눌 수 없습니다.\n");
+                                                }
+                                                    break;
                                             case "%":
-                                                실수값 %= decimal.Parse(값[띄어쓰기[4]].ToString());
-                                                형식.Add(띄어쓰기[1], "decimal");
-                                                값.Add(띄어쓰기[1], 실수값.ToString());
-                                                break;
+                                                    try
+                                                    {
+                                                        실수값 %= (decimal)값[띄어쓰기[4]];
+                                                        형식.Add(띄어쓰기[1], "decimal");
+                                                        값.Add(띄어쓰기[1], 실수값);
+                                                    }
+                                                    catch
+                                                    {
+                                                        File.WriteAllText("err.log", File.ReadAllText("err.log") + 계수기 + "번째 줄: 0으로 나눌 수 없습니다.\n");
+                                                    }
+                                                    break;
                                             default:
                                                 File.WriteAllText("err.log", File.ReadAllText("err.log") + 계수기 + "번째 줄: 해당하는 연산자는 존재하지 않습니다.\n");
                                                 break;
@@ -355,7 +388,10 @@ namespace koreanscript_csharp
                     }
                 }
                 }
+
             }
+            this.값 = 값;
+            this.형식 = 형식;
         }
 
 
