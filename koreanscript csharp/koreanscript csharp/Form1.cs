@@ -221,5 +221,25 @@ namespace koreanscript_csharp
         {
             Application.Restart();
         }
+
+        private void 도움말보기말하기ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            richTextBox2.Text = "말하기 기능 도움말\n\n" +
+                "말하기: 지정한 변수를 말합니다. (사용법: 말하기 [변수이름])\n" +
+                "새줄말하기: 지정한 변수를 말합니다. 단 말할 때 줄을 하나 만들고 말합니다. (사용법: 새줄말하기 [변수이름])";
+        }
+
+        private void 도움말보기조건문ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            richTextBox2.Text = "조건문 기능 도움말 \n\n" +
+                "만약에: 변수 둘을 비교해 참과 거짓을 판별합니다. 만약에 참이라면 지정한 줄 수만큼 실행을 하고 그렇지 않으면 뛰어넘습니다.\n" +
+                "사용법: 만약에 [변수1] [등호, 부등호들] [변수2] [줄 수] (예제: 만약에 변1 > 변2 3)";
+        }
+
+        private void 도움말보기이동ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            richTextBox2.Text = "조건문 기능 도움말 \n\n" +
+                   "이동: 지정한 줄로 이동합니다. (사용법: 이동 [줄]\n";
+        }
     }
 }

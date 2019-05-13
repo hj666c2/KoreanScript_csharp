@@ -40,6 +40,9 @@
             this.도움말ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.도움말보기전체ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.도움말보기변수ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.도움말보기말하기ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.도움말보기조건문ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.도움말보기이동ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.도움말보기단축키ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.시작ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.시작ToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
@@ -70,11 +73,12 @@
             // 
             this.richTextBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.richTextBox1.Font = new System.Drawing.Font("굴림", 12F);
+            this.richTextBox1.ForeColor = System.Drawing.Color.LightGray;
             this.richTextBox1.Location = new System.Drawing.Point(12, 27);
             this.richTextBox1.Name = "richTextBox1";
             this.richTextBox1.Size = new System.Drawing.Size(760, 250);
             this.richTextBox1.TabIndex = 0;
-            this.richTextBox1.Text = "";
+            this.richTextBox1.Text = "명령어를 입력해 주세요";
             // 
             // menuStrip1
             // 
@@ -119,6 +123,9 @@
             this.도움말ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.도움말보기전체ToolStripMenuItem,
             this.도움말보기변수ToolStripMenuItem,
+            this.도움말보기말하기ToolStripMenuItem,
+            this.도움말보기조건문ToolStripMenuItem,
+            this.도움말보기이동ToolStripMenuItem,
             this.도움말보기단축키ToolStripMenuItem});
             this.도움말ToolStripMenuItem.Name = "도움말ToolStripMenuItem";
             this.도움말ToolStripMenuItem.Size = new System.Drawing.Size(76, 20);
@@ -137,6 +144,27 @@
             this.도움말보기변수ToolStripMenuItem.Size = new System.Drawing.Size(186, 22);
             this.도움말보기변수ToolStripMenuItem.Text = "도움말 보기 (변수)";
             this.도움말보기변수ToolStripMenuItem.Click += new System.EventHandler(this.도움말보기변수ToolStripMenuItem_Click);
+            // 
+            // 도움말보기말하기ToolStripMenuItem
+            // 
+            this.도움말보기말하기ToolStripMenuItem.Name = "도움말보기말하기ToolStripMenuItem";
+            this.도움말보기말하기ToolStripMenuItem.Size = new System.Drawing.Size(186, 22);
+            this.도움말보기말하기ToolStripMenuItem.Text = "도움말 보기 (말하기)";
+            this.도움말보기말하기ToolStripMenuItem.Click += new System.EventHandler(this.도움말보기말하기ToolStripMenuItem_Click);
+            // 
+            // 도움말보기조건문ToolStripMenuItem
+            // 
+            this.도움말보기조건문ToolStripMenuItem.Name = "도움말보기조건문ToolStripMenuItem";
+            this.도움말보기조건문ToolStripMenuItem.Size = new System.Drawing.Size(186, 22);
+            this.도움말보기조건문ToolStripMenuItem.Text = "도움말 보기 (조건문)";
+            this.도움말보기조건문ToolStripMenuItem.Click += new System.EventHandler(this.도움말보기조건문ToolStripMenuItem_Click);
+            // 
+            // 도움말보기이동ToolStripMenuItem
+            // 
+            this.도움말보기이동ToolStripMenuItem.Name = "도움말보기이동ToolStripMenuItem";
+            this.도움말보기이동ToolStripMenuItem.Size = new System.Drawing.Size(186, 22);
+            this.도움말보기이동ToolStripMenuItem.Text = "도움말 보기 (이동)";
+            this.도움말보기이동ToolStripMenuItem.Click += new System.EventHandler(this.도움말보기이동ToolStripMenuItem_Click);
             // 
             // 도움말보기단축키ToolStripMenuItem
             // 
@@ -160,7 +188,7 @@
             // 
             this.시작ToolStripMenuItem1.Name = "시작ToolStripMenuItem1";
             this.시작ToolStripMenuItem1.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.B)));
-            this.시작ToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
+            this.시작ToolStripMenuItem1.Size = new System.Drawing.Size(162, 22);
             this.시작ToolStripMenuItem1.Text = "시작";
             this.시작ToolStripMenuItem1.Click += new System.EventHandler(this.시작ToolStripMenuItem1_Click);
             // 
@@ -168,14 +196,14 @@
             // 
             this.종료ToolStripMenuItem.Name = "종료ToolStripMenuItem";
             this.종료ToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.E)));
-            this.종료ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.종료ToolStripMenuItem.Size = new System.Drawing.Size(162, 22);
             this.종료ToolStripMenuItem.Text = "종료";
             this.종료ToolStripMenuItem.Click += new System.EventHandler(this.종료ToolStripMenuItem_Click);
             // 
             // 프로그램재시작ToolStripMenuItem
             // 
             this.프로그램재시작ToolStripMenuItem.Name = "프로그램재시작ToolStripMenuItem";
-            this.프로그램재시작ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.프로그램재시작ToolStripMenuItem.Size = new System.Drawing.Size(162, 22);
             this.프로그램재시작ToolStripMenuItem.Text = "프로그램 재시작";
             this.프로그램재시작ToolStripMenuItem.Click += new System.EventHandler(this.프로그램재시작ToolStripMenuItem_Click);
             // 
@@ -216,6 +244,9 @@
         private System.Windows.Forms.ToolStripMenuItem 시작ToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem 종료ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 프로그램재시작ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 도움말보기말하기ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 도움말보기조건문ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 도움말보기이동ToolStripMenuItem;
     }
 }
 
