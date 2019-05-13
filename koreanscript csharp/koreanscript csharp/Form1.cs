@@ -156,6 +156,24 @@ namespace koreanscript_csharp
                                     File.WriteAllText("err.log", $"{File.ReadAllText("err.log")}{계수기와1}번째 줄, 해당하는 변수가 존재하지 않습니다.\n");
                                 }
                             }
+                            else if (띄어쓰기[0] == "새줄말하기")
+                            {
+                                try
+                                {
+                                    string 변수 = "\n" + 변수값[띄어쓰기[1]].ToString();
+                                    if (변수.Contains(@"\줄"))
+                                    {
+                                        string[] 줄나누기 = 변수.Split(new string[] { @"\줄" }, StringSplitOptions.None);
+                                        변수 = string.Join("\n", 줄나누기);
+                                    }
+                                    출력 += 변수;
+                                }
+                                catch
+                                {
+                                    File.WriteAllText("err.log", $"{File.ReadAllText("err.log")}{계수기와1}번째 줄, 해당하는 변수가 존재하지 않습니다.\n");
+                                }
+
+                            }
                             else if (띄어쓰기[0] == "값지정")
                             {
                                 변수제어 변수 = new 변수제어();
