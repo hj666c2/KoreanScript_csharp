@@ -73,12 +73,12 @@
             // 
             this.richTextBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.richTextBox1.Font = new System.Drawing.Font("굴림", 12F);
-            this.richTextBox1.ForeColor = System.Drawing.Color.LightGray;
+            this.richTextBox1.ForeColor = System.Drawing.Color.Black;
             this.richTextBox1.Location = new System.Drawing.Point(12, 27);
             this.richTextBox1.Name = "richTextBox1";
             this.richTextBox1.Size = new System.Drawing.Size(760, 250);
             this.richTextBox1.TabIndex = 0;
-            this.richTextBox1.Text = "명령어를 입력해 주세요";
+            this.richTextBox1.Text = "";
             // 
             // menuStrip1
             // 
