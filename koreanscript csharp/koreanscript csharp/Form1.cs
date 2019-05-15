@@ -103,7 +103,6 @@ namespace koreanscript_csharp
 
         private async void 시작ToolStripMenuItem1_Click(object sender, EventArgs e)
         {
-            richTextBox2.Text = "기다려 주세요...";
             변수값.Clear();
             변수형식.Clear();
             if (richTextBox1.Text == "") { richTextBox2.Text = "명령어를 입력해 주세요."; }
@@ -188,6 +187,13 @@ namespace koreanscript_csharp
                                 계수기 = 조건문.바꾸는계수기;
                             }
                             else if (띄어쓰기[0] == "이동") { await Task.Delay(1); 계수기 = int.Parse(띄어쓰기[1]) - 2; }
+                            else if (띄어쓰기[0] == "변수삭제")
+                            {
+                                변수제어 변수 = new 변수제어();
+                                await 변수.변수제거(띄어쓰기, 계수기와1, 변수값, 변수형식);
+                                변수값 = 변수.값;
+                                변수형식 = 변수.형식;
+                            }
                             else
                             {
                                 File.WriteAllText("err.log", $"{File.ReadAllText("err.log")}{계수기와1}번째 줄, 해당하는 명령어가 존재하지 않습니다.\n");

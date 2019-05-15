@@ -9,7 +9,6 @@ namespace koreanscript_csharp
 {
     class 변수제어 : Form1
     {
-        //읽으실 때 주의: 이 코드는 (개발자 생각에)스파게티입니다. 그래서 옆에 메모장 등을 켜 놓으시고 번역하시면서 읽는것을 추천 (주석도 없으니...)
         public Hashtable 값 = new Hashtable();
         public Hashtable 형식 = new Hashtable();
         public async Task 변수쓰기(string 한줄, string[] 띄어쓰기, int 계수기, Hashtable 값, Hashtable 형식)
@@ -758,6 +757,28 @@ namespace koreanscript_csharp
             }
             this.값 = 값;
             this.형식 = 형식;
+        }
+        public async Task 변수제거(string[] 띄어쓰기,int 계수기,Hashtable 변수값, Hashtable 변수형식)
+        {
+            if (띄어쓰기[1] == "\"모두")
+            {
+                변수값.Clear();
+                변수형식.Clear();
+            }
+            else
+            {
+                try
+                {
+                    변수값.Remove(띄어쓰기[1]);
+                    변수형식.Remove(띄어쓰기[1]);
+                }
+                catch
+                {
+                    File.WriteAllText("err.log", $"{File.ReadAllText("err.log")}{계수기}번째 줄, 변수가 존재하지 않습니다.\n");
+                }
+            }
+            this.변수형식 = 변수형식;
+            this.변수값 = 변수값;
         }
     }
 }
