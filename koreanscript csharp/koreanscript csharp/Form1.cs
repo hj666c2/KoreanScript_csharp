@@ -167,6 +167,7 @@ namespace koreanscript_csharp
                                 계수기 = 조건문.바꾸는계수기;
                             }
                             else if (띄어쓰기[0] == "이동") { await Task.Delay(1); 계수기 = int.Parse(띄어쓰기[1]) - 2; }
+                            else if (띄어쓰기[0] == "뛰어넘기") { await Task.Delay(1); 계수기 = 계수기 + int.Parse(띄어쓰기[1]); }
                             else if (띄어쓰기[0] == "변수삭제")
                             {
                                 변수제어 변수 = new 변수제어();

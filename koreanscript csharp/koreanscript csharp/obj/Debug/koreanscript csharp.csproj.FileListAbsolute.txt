@@ -42,3 +42,13 @@ C:\Users\배재현\KoreanScript_csharp\koreanscript csharp\koreanscript csharp\o
 C:\Users\배재현\KoreanScript_csharp\koreanscript csharp\koreanscript csharp\obj\Debug\koreanscript csharp.csproj.CoreCompileInputs.cache
 C:\Users\배재현\KoreanScript_csharp\koreanscript csharp\koreanscript csharp\obj\Debug\koreanscript csharp.exe
 C:\Users\배재현\KoreanScript_csharp\koreanscript csharp\koreanscript csharp\obj\Debug\koreanscript csharp.pdb
+C:\Users\hj666\Desktop\프로그래밍\오픈소스 프로젝트\koreanscript_csharp\koreanscript csharp\koreanscript csharp\bin\Debug\koreanscript csharp.exe.config
+C:\Users\hj666\Desktop\프로그래밍\오픈소스 프로젝트\koreanscript_csharp\koreanscript csharp\koreanscript csharp\bin\Debug\koreanscript csharp.exe
+C:\Users\hj666\Desktop\프로그래밍\오픈소스 프로젝트\koreanscript_csharp\koreanscript csharp\koreanscript csharp\bin\Debug\koreanscript csharp.pdb
+C:\Users\hj666\Desktop\프로그래밍\오픈소스 프로젝트\koreanscript_csharp\koreanscript csharp\koreanscript csharp\obj\Debug\koreanscript csharp.csprojAssemblyReference.cache
+C:\Users\hj666\Desktop\프로그래밍\오픈소스 프로젝트\koreanscript_csharp\koreanscript csharp\koreanscript csharp\obj\Debug\koreanscript_csharp.Form1.resources
+C:\Users\hj666\Desktop\프로그래밍\오픈소스 프로젝트\koreanscript_csharp\koreanscript csharp\koreanscript csharp\obj\Debug\koreanscript_csharp.Properties.Resources.resources
+C:\Users\hj666\Desktop\프로그래밍\오픈소스 프로젝트\koreanscript_csharp\koreanscript csharp\koreanscript csharp\obj\Debug\koreanscript csharp.csproj.GenerateResource.cache
+C:\Users\hj666\Desktop\프로그래밍\오픈소스 프로젝트\koreanscript_csharp\koreanscript csharp\koreanscript csharp\obj\Debug\koreanscript csharp.csproj.CoreCompileInputs.cache
+C:\Users\hj666\Desktop\프로그래밍\오픈소스 프로젝트\koreanscript_csharp\koreanscript csharp\koreanscript csharp\obj\Debug\koreanscript csharp.exe
+C:\Users\hj666\Desktop\프로그래밍\오픈소스 프로젝트\koreanscript_csharp\koreanscript csharp\koreanscript csharp\obj\Debug\koreanscript csharp.pdb
