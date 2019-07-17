@@ -114,7 +114,7 @@ namespace koreanscript_csharp
                             else if (띄어쓰기[0] == "정수변수" || 띄어쓰기[0] == "문자변수" || 띄어쓰기[0] == "실수변수")
                             {
                                 변수제어 변수제어 = new 변수제어();
-                                await 변수제어.변수쓰기(한줄[계수기], 띄어쓰기, 계수기와1, 변수값, 변수형식);
+                                await 변수제어.변수쓰기(한줄[계수기], 띄어쓰기);
                             }
                             else if (띄어쓰기[0] == "말하기")
                             {
@@ -154,7 +154,7 @@ namespace koreanscript_csharp
                             else if (띄어쓰기[0] == "값지정")
                             {
                                 변수제어 변수 = new 변수제어();
-                                await 변수.값지정(한줄[계수기], 띄어쓰기, 계수기와1, 변수값, 변수형식);
+                                await 변수.값지정(한줄[계수기], 띄어쓰기);
                             }
                             else if (띄어쓰기[0] == "만약")
                             {
@@ -167,9 +167,13 @@ namespace koreanscript_csharp
                             else if (띄어쓰기[0] == "변수삭제")
                             {
                                 변수제어 변수 = new 변수제어();
-                                await 변수.변수제거(띄어쓰기, 계수기와1, 변수값, 변수형식);
+                                await 변수.변수제거(띄어쓰기);
                             }
-                            else if (띄어쓰기[0] == "형변환") { }
+                            else if (띄어쓰기[0] == "형변환")
+                            {
+                                변수제어 변수 = new 변수제어();
+                                await 변수.형변환(띄어쓰기);
+                            }
                             else
                             {
                                 File.WriteAllText("err.log", $"{File.ReadAllText("err.log")}{계수기와1}번째 줄, 해당하는 명령어가 존재하지 않습니다.\n");
