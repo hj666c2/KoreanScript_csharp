@@ -775,7 +775,30 @@ namespace koreanscript_csharp
         }
         public async Task 형변환(string[] 띄어쓰기)
         {
-            
+            try
+            {
+                if (띄어쓰기[2] == "정수변수")
+                {
+                    int outint;
+                    if (int.TryParse(변수값[띄어쓰기[1]].ToString(), out outint))
+                    {
+                        변수값[띄어쓰기[1]] = outint;
+                        변수형식[띄어쓰기[1]] = "int";
+                    }
+                }
+                else if (띄어쓰기[2] == "실수변수")
+                {
+
+                }
+                else if (띄어쓰기[2] == "문자변수")
+                {
+                    
+                }
+            }
+            catch
+            {
+
+            }
         }
     }
 }
