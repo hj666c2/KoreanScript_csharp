@@ -12,8 +12,8 @@ namespace koreanscript_csharp
 {
     public partial class Form1 : Form
     {
-        public Hashtable 변수값 = new Hashtable();
-        public Hashtable 변수형식 = new Hashtable();
+        public static Hashtable 변수값 = new Hashtable();
+        public static Hashtable 변수형식 = new Hashtable();
         public int 계수기 = 0;
         public Form1()
         {
@@ -115,8 +115,6 @@ namespace koreanscript_csharp
                             {
                                 변수제어 변수제어 = new 변수제어();
                                 await 변수제어.변수쓰기(한줄[계수기], 띄어쓰기, 계수기와1, 변수값, 변수형식);
-                                변수값 = 변수제어.값;
-                                변수형식 = 변수제어.형식;
                             }
                             else if (띄어쓰기[0] == "말하기")
                             {
@@ -157,8 +155,6 @@ namespace koreanscript_csharp
                             {
                                 변수제어 변수 = new 변수제어();
                                 await 변수.값지정(한줄[계수기], 띄어쓰기, 계수기와1, 변수값, 변수형식);
-                                변수값 = 변수.값;
-                                변수형식 = 변수.형식;
                             }
                             else if (띄어쓰기[0] == "만약")
                             {
@@ -172,9 +168,8 @@ namespace koreanscript_csharp
                             {
                                 변수제어 변수 = new 변수제어();
                                 await 변수.변수제거(띄어쓰기, 계수기와1, 변수값, 변수형식);
-                                변수값 = 변수.값;
-                                변수형식 = 변수.형식;
                             }
+                            else if (띄어쓰기[0] == "형변환") { }
                             else
                             {
                                 File.WriteAllText("err.log", $"{File.ReadAllText("err.log")}{계수기와1}번째 줄, 해당하는 명령어가 존재하지 않습니다.\n");

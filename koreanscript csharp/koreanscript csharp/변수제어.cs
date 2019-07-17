@@ -9,8 +9,6 @@ namespace koreanscript_csharp
 {
     class 변수제어 : Form1
     {
-        public Hashtable 값 = new Hashtable();
-        public Hashtable 형식 = new Hashtable();
         public async Task 변수쓰기(string 한줄, string[] 띄어쓰기, int 계수기, Hashtable 값, Hashtable 형식)
         {
             try
@@ -66,6 +64,7 @@ namespace koreanscript_csharp
                                     }
                                     형식.Add(띄어쓰기[1], "int");
                                     값.Add(띄어쓰기[1], 정수값);
+
                                 }
                                 catch
                                 {
@@ -396,8 +395,6 @@ namespace koreanscript_csharp
                 }
 
             }
-            this.값 = 값;
-            this.형식 = 형식;
         }
 
 
@@ -755,8 +752,6 @@ namespace koreanscript_csharp
             {
                 File.WriteAllText("err.log", $"{File.ReadAllText("err.log")}{계수기}번째 줄, 변수가 존재하지 않습니다.\n");
             }
-            this.값 = 값;
-            this.형식 = 형식;
         }
         public async Task 변수제거(string[] 띄어쓰기,int 계수기,Hashtable 변수값, Hashtable 변수형식)
         {
@@ -777,8 +772,6 @@ namespace koreanscript_csharp
                     File.WriteAllText("err.log", $"{File.ReadAllText("err.log")}{계수기}번째 줄, 변수가 존재하지 않습니다.\n");
                 }
             }
-            this.변수형식 = 변수형식;
-            this.변수값 = 변수값;
         }
     }
 }
